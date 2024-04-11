@@ -1,0 +1,15 @@
+@import "./colors";
+.page_not_found_cont{
+    // border: 2px solid red;
+    font-size: 20px;
+    text-align: center;
+    height: 80vh;
+    align-content: center;
+    h1{
+        font-size: 5rem;
+        color: black;
+    }
+    p{
+        color: $primary;
+    }
+}

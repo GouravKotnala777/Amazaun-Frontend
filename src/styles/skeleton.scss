@@ -1,0 +1,19 @@
+
+
+.skeleton{
+    height: 30px;
+    background: #f4f4f4;
+    animation: skeleton_animation 1s linear infinite;
+}
+
+@keyframes skeleton_animation {
+    0%{
+        background: #bcbcbc;
+    }
+    50%{
+        background: #f4f4f4;
+    }
+    100%{
+        background: #bcbcbc;
+    }
+};

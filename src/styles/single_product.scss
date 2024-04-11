@@ -1,0 +1,120 @@
+@import "./colors";
+
+.product_cont{
+    // border:2px solid red;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    flex-wrap:wrap;
+    .image_cont{
+        // border:2px solid violet;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 300px;
+        img{
+            // border:2px solid indigo;
+            // width: 300px;
+            width: 100%;
+        }
+        .wishlist_system_cont{
+            display: flex;
+            align-items: center;
+            .wishlist_checkbox{
+                // border: 2px solid greenyellow;
+                width:20px;
+                height:20px;
+            }
+        }
+    }
+    .details_cont{
+        // border:2px solid blue;
+        display: flex;
+        flex-direction: column;
+        max-width: 300px;
+        width: 300px;
+        .detail_cont{
+            // border:2px solid green;
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            
+            .detail_heading{
+                // border:2px solid yellow;
+                font-size: 18px;
+                font-weight: bold;
+                color: #515151;
+            }
+            .detail_value{
+                // border:2px solid red;
+                font-size: 18px;
+                color: #424242;
+            }
+        }
+    }
+}
+.reviews_cont{
+    // border: 2px solid red;
+    .review_heading{
+        padding:10px;
+        font-size: 20px;
+        background:linear-gradient(90deg, $primary, $secondary);
+        color: white;
+        border-radius: 8px;
+    }
+    .review_cont{
+        // border: 2px solid violet;
+        display: flex;
+        padding:10px;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+        .user_photo_cont{
+            // border: 2px solid red;
+            width: 150px;
+            height: 150px;
+            align-content: center;
+            text-align: center;
+
+
+            img{
+                // border: 2px solid green;
+                width:80px;
+                border-radius:3rem;
+                background: red;
+            }
+        }
+        .user_detail{
+            // border: 2px solid blue;
+            font-size: 18px;
+            text-align: center;
+            // margin: 0 10px;
+            width: 450px;
+            min-width: 200px;
+            word-wrap: break-word;
+            .user_email{
+                // border: 2px solid green;
+                font-weight: bold;
+                // color: #515151;
+                color: $primary;
+
+            }
+            .comment{
+                color: #515151;
+                text-align: justify;
+                // padding:10px 20px;
+            }
+        }
+    }
+}
+
+
+@media screen and (width <= 570px) {
+    .reviews_cont{
+        .review_cont{
+            .user_detail{
+                font-size: 14px;
+            }
+        }
+    }
+}

@@ -1,0 +1,100 @@
+@import "_colors";
+
+@mixin colorMixin($a:red, $b:bold) {
+    color:$a;
+    font-weight: $b;
+}
+
+:root {
+    @include colorMixin(black,500); // if there is not arguments then it's value would be red and bold
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    // background: $color2;
+    // border:2px solid red;
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 12px;
+    background: linear-gradient(to bottom right, rgb(255, 228, 232), white);
+    
+}
+
+.no-scroll{
+    overflow: hidden;
+    
+}
+
+.ham_inp_wrapper{
+    // border: 2px solid blue;
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: absolute;
+    top: 0%;
+    // left: -68%;
+    // left: 0%;
+    // z-index: 19;
+    // z-index: 1;
+    .ham_close_area{
+        // border: 2px solid green;
+        width: 20%;
+        height: 99%;
+        .CgClose{
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            top: 3%;
+            right: 16%;
+            color: white;
+        }
+    }
+}
+.GiHamburgerMenu{
+    display: none;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 4%;
+    left: 10%;
+    z-index: 19;
+    cursor: pointer;
+}
+.ham_close_btn{
+    // border: 2px solid blue;
+    position: absolute;
+    top: -1%;
+    left: 10%;
+    width:40px;
+    height: 40px;
+    margin-top:30px;
+    // opacity: 0;
+    // z-index: 20;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (width <= 750px) {
+    :root {
+        font-size: 11px;
+    }
+    
+}
+@media screen and (width <= 570px) {
+    .ham_inp_wrapper{
+        display: flex;
+    }
+    .GiHamburgerMenu{
+        display: block;
+    }
+}

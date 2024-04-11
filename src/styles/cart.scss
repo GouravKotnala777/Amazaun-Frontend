@@ -1,0 +1,159 @@
+@import "./colors";
+
+.no-scroll{
+    overflow: hidden;   
+}
+.dark-background{
+    background: #978688;
+}
+
+.cart_cont{
+    // border:2px solid red;
+    .total_amount_dialog{
+        // border: 2px solid $primary;
+        width: 92%;
+        background: white;
+        padding:2px;
+        position: absolute;
+        top: 30%;
+        border: none;
+        border-radius: 8px;
+        z-index:20;
+        .CgClose{
+            // border: 2px solid red;
+            // margin-left: 92%;
+            // margin-top: 2px;
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            font-size: 20px;
+            background: rgb(231, 231, 231);
+            cursor:pointer;
+            &:hover{
+                background: rgb(244, 244, 244);
+                color: gray;
+            }
+        }
+        .table_inner_div{
+            // border: 2px solid rgb(70, 41, 255);
+            text-align: center;
+            overflow-x: scroll;
+            width:97.5%;
+            padding: 2px;
+            margin-top: 35px;
+            // margin-bottom: 10px;
+            padding-bottom: 10px;
+            table{
+                // border: 2px solid rgb(130, 238, 166);
+                width: 400px;
+                margin:0 auto;
+                th{
+                    // border: 2px solid indigo;
+                }
+                td{
+                    // border: 2px solid blue;
+                }
+            }
+        }
+    }
+    .checkout_all_cont{
+        border: 2px solid $primary;
+        width: 40%;
+        min-width: 150px;
+        margin-left: auto;
+        margin-top:10px;
+        text-align: center;
+        font-size: 20px;
+        padding: 10px 0;
+        border-radius: 8px;
+        color: $primary;
+        .checkout_info{
+            // border: 2px solid green;
+            width: max-content;
+            height: 35px;
+            margin-top: -14px;
+            margin-left: auto;
+            margin-right: 0px;
+            font-size: 30px;
+            padding: 0;
+            cursor: pointer;
+            >:hover.BiInfoCircle{
+                color: $secondary;
+            }
+            .BiInfoCircle{
+                // :hover{
+                    
+                // }
+            }
+        }
+        .total_amount{
+            // border: 2px solid green;
+            font-weight: bold;
+            width: max-content;
+            margin: 10px auto;
+        }
+        button{
+            padding:10px;
+            font-weight:800;
+            // background:#ff3153;
+            background:$primary;
+            color:white;
+            border:none;
+            border-radius:4px;
+            cursor:pointer;
+            transition: 0.2s;
+            
+            &:hover{
+                // background:#ff8753;
+                background:$secondary;
+            }
+        }
+    }
+    .product_cont{
+        // border: 2px solid violet;
+        display:flex;
+        justify-content: space-around;
+        margin:20px 0;
+        .left_section{
+            // border: 2px solid blue;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            img{
+                // border: 2px solid rgb(0, 130, 100);
+            }
+            input{
+                // border: 2px solid indigo;
+                width: 20px;
+                height: 20px;
+            }
+        }
+        .right_section{
+            // border: 2px solid greenyellow;
+            display: flex;
+            flex-direction: column;
+            max-width: 300px;
+            width: 300px;
+            color: rgb(79, 79, 79);
+            padding:10px;
+            .detail_cont{
+                // border:2px solid green;
+                display: flex;
+                justify-content: space-between;
+                margin: 10px 0;
+                
+                .detail_heading{
+                    // border:2px solid yellow;
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: #515151;
+                }
+                .detail_value{
+                    // border:2px solid red;
+                    font-size: 18px;
+                    color: #424242;
+                }
+            }
+        }
+    }
+}

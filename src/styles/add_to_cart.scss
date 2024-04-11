@@ -1,0 +1,30 @@
+@import "./colors";
+
+.btn_cont{
+    // border:2px solid green;
+    display:flex;
+    justify-content:space-between;
+    width: 100%;
+    padding: 4px 0;
+    .remove_btn{
+        background: transparent;
+        border: 1px solid $primary;
+        color: $primary;
+    }
+    button{
+        // width: 48px;
+        padding:10px;
+        font-weight:800;
+        // background:#ff3153;
+        background:$primary;
+        color:white;
+        border:none;
+        border-radius:4px;
+        cursor:pointer;
+        transition: 0.2s;
+        &:hover{
+            // background:#ff8753;
+            background:$secondary;
+        }
+    };
+}
