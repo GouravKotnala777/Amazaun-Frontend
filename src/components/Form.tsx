@@ -1,5 +1,5 @@
 import "../styles/form.scss";
-import React, { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC } from "react";
 
 interface FormFieldsTypes {
     type:string;
