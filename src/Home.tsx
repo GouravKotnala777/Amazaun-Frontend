@@ -79,7 +79,7 @@ function Home({homeCheck}:{homeCheck:boolean}) {
 
     const fetchingAllProducts = async() => {
         try {
-            const res = await fetch("http://localhost:8000/api/v1/product/all", {
+            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/product/all`, {
                 method:"GET",
                 headers:{
                     "Content-Type":"application/json"
@@ -102,7 +102,7 @@ function Home({homeCheck}:{homeCheck:boolean}) {
     };
     const fetchingAllProductsWithSearchedQueries = async() => {
         try {
-            const res = await fetch("http://localhost:8000/api/v1/product/all", {
+            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/product/all`, {
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"
@@ -189,18 +189,7 @@ function Home({homeCheck}:{homeCheck:boolean}) {
                         (
                             <div className="product_cont" key={index}>
                                 <Link to={`/product/${product._id}`} className="product_cont_link">
-                                    {
-                                        reactLogo ?
-                                        <>
-                                            {JSON.stringify(reactLogo)}
-                                            <img src={reactLogo} alt={reactLogo} className="product_img" />
-                                        </>
-                                        :
-                                        <div className="product_img">
-                                            {JSON.stringify(reactLogo)}
-                                            <Skeleton height={177} />
-                                        </div>
-                                    }
+                                    <img src={reactLogo} alt={reactLogo} className="product_img" />
                                     <div className="product_detailes">{product.name}</div>
                                     <div className="product_detailes">{product.price}</div>
                                     <div className="product_detailes">{product.stock}</div>

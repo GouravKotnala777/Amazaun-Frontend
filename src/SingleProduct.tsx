@@ -19,7 +19,7 @@ const SingleProduct = ({homeCheck}:{homeCheck:boolean;}) => {
 
     const getSingleProduct = async() => {
         try {
-            const res = await fetch(`http://localhost:8000/api/v1/product/${productID}`, {
+            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/product/${productID}`, {
                 method:"GET",
                 headers:{
                     "Content-Type":"application/json"
@@ -42,7 +42,7 @@ const SingleProduct = ({homeCheck}:{homeCheck:boolean;}) => {
     };
     const addToWishlist = async() => {
         try {
-            const res = await fetch(`http://localhost:8000/api/v1/product/wishlist`, {
+            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/product/wishlist`, {
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"

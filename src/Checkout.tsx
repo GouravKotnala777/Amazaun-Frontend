@@ -3,28 +3,31 @@ import { loadStripe } from "@stripe/stripe-js";
 import { FormEvent, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
+// import { useState } from "react";
+// import StripeCheckout, { Token } from "react-stripe-checkout";
+
+
+
+
 const stripePromise = loadStripe(
     "pk_test_51Oc3xKSHf5vitJ9rEYdbqKhf7MmyOGBWIL2GJs8NDprnDtHs4QoaVNOUTDIA1mzjBxlwUgY00u6x6AhMD5OMdO4X00WbRXvaOo"
 );
-
-const CheckOutForm = () => {
+const CheckOutForm = ({productID, quantity}:{productID:string; quantity:number;}) => {
     const stripe = useStripe();
     const elements = useElements();
     const [isProcessing, setISProcessing] = useState<boolean>(false);
     const navigate = useNavigate();
-
 
     const submitHandler = async(e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (!stripe || !elements) {
             console.log("stripe ya element nahi hai");
+            console.log({stripe});
+            console.log({elements});
             return;
         }
-
         setISProcessing(true);
-
-        // const order = {};
 
         const {paymentIntent, error} = await stripe.confirmPayment({
             elements,
@@ -33,22 +36,62 @@ const CheckOutForm = () => {
         });
 
         if (error) {
-            setISProcessing(false);
+            await fetch(`${import.meta.env.VITE_SERVER_URL}/order/new`, {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                credentials:"include",
+                body:JSON.stringify({productID, quantity, status:"Failed", message:error.message})
+            });
+
+
             console.log("Something went wrong from Checkout.tsx");
+            console.log(error);
+            setISProcessing(false);
             return;
         }
+        
+        try {
+            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/order/new`, {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                credentials:"include",
+                body:JSON.stringify({productID, quantity, status:paymentIntent.status, message:paymentIntent.description})
+            });
 
-        if (paymentIntent.status === "succeeded") {
-            console.log("Placing Order");
-            navigate("/orders");
+            const data = await res.json();
+
+            console.log("-------  Checkout.tsx   after payment success");
+            console.log(data);
+            console.log("-------  Checkout.tsx   after payment success");
+
+            
+            console.log({paymentIntent});
+            if (paymentIntent.status === "succeeded") {
+                
+                console.log("Placing Order");
+                navigate("/orders");
+            }
+            setISProcessing(false);
+            
+        } catch (error) {
+            console.log("-------  Checkout.tsx   after payment error");
+            console.log("error from checkout after payment === succeeded");
+            console.log(error);
+            console.log("-------  Checkout.tsx   after payment error");
+            setISProcessing(false);
         }
-        setISProcessing(false);
+        
     };
+
     return(
-        <div className="checkout_cont">
+        <div className="checkout-container">
             <form onSubmit={submitHandler}>
                 <PaymentElement />
-                <button>{isProcessing?"Processing...":"Pay"}</button>
+                <button disabled={isProcessing}>{isProcessing ? "Processing..." : "Pay"}</button>
             </form>
         </div>
     )
@@ -57,15 +100,66 @@ const CheckOutForm = () => {
 const Checkout = () => {
     const location = useLocation();
 
-    const clientSecret:string|undefined = location.state;
+    const locationState:{clientSecret:string; productID:string; quantity:number;}|undefined = location.state;
+    console.log({locationState});
 
-    if (!clientSecret) return <Navigate to={"/shipping"} />;
+    if (!locationState?.clientSecret) return <Navigate to={"/shipping"} />;
+    if (!locationState?.productID) return <Navigate to={"/"} />;
+    if (!locationState?.quantity) return <Navigate to={"/"} />;
 
-    return(
-        <Elements options={{clientSecret}} stripe={stripePromise}>
-            <CheckOutForm />
+    return (
+        <Elements options={{
+            clientSecret:locationState.clientSecret
+        }} stripe={stripePromise}>
+            <CheckOutForm productID={locationState.productID} quantity={locationState.quantity} />
         </Elements>
     )
 };
+
+
+
+
+
+
+
+
+// const stripeKey:string = "pk_test_51Oc3xKSHf5vitJ9rEYdbqKhf7MmyOGBWIL2GJs8NDprnDtHs4QoaVNOUTDIA1mzjBxlwUgY00u6x6AhMD5OMdO4X00WbRXvaOo";
+
+// const Checkout = () => {
+//     const [product, setProduct] = useState({
+//         name:"Product1",
+//         price:111,
+
+//     });
+
+//     const makePayment = async(token:Token) => {
+//         const body = {
+//             token, product
+//         };
+//         const headers = {
+//             "Content-Type":"application/json"
+//         };
+//         return fetch("http://localhost:8000/api/v1/payment/new2", {
+//             method:"POST",
+//             headers,
+//             body:JSON.stringify(body)
+//         }).then((res) => {
+//             console.log("------ payment2");
+//             console.log(res);
+//             console.log(res.status);
+//             console.log("------ payment2");
+//             setProduct({name:"aaaa", price:201})
+//         }).catch((err) => console.log(err))
+//     };
+
+//     return(
+//         <>
+//         <StripeCheckout stripeKey={stripeKey} token={makePayment} name="Buy Anything" amount={Number(product.price)*100}>
+//             {/* <button>AAAA</button> */}
+//         </StripeCheckout>
+//         </>
+//     )
+// };
+
 
 export default Checkout;

@@ -13,7 +13,7 @@ const Logout = () => {
     const logoutHandler = async() => {
         try {
             if (checkBoxValue) {
-                const res = await fetch("http://localhost:8000/api/v1/user/logout", {
+                const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/logout`, {
                     method:"POST",
                     headers:{
                         "Content-Type":"application/json"

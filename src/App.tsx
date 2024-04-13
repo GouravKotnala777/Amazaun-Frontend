@@ -20,6 +20,8 @@ import Shipping from "./Shipping"
 import NotFound from "./components/NotFound"
 import ProtectedRoute from "./components/ProtectedRoute"
 import PageNotFound from "./components/PageNotFound"
+import Order from "./Order"
+import AllOrders from "./AllOrders"
 
 
 function App() {
@@ -31,7 +33,7 @@ function App() {
 
   const loggedInUser = async() => {
     try {
-      const res = await fetch("http://localhost:8000/api/v1/user/me", {
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/me`, {
         method:"GET",
         headers:{
           "Content-Type":"application/json"
@@ -45,7 +47,7 @@ function App() {
       console.log(data);
       console.log("------  App.tsx  loggedInUser");
       if (data.message === "jwt expired") {
-        const resRefreshToken = await fetch("http://localhost:8000/api/v1/user/refresh-token", {
+        const resRefreshToken = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/refresh-token`, {
           method:"POST",
           headers:{
             "Content-Type":"application/json"
@@ -121,8 +123,12 @@ function App() {
         //  If user is loggedin not if loggedout
           <Route path="/logout" element={<ProtectedRoute isUserloggedIn={payload?.role as string} children={<Logout />} />} />
           <Route path="/cart" element={<ProtectedRoute isUserloggedIn={payload?.role as string} children={<Cart homeCheck={homeCheck} />} />} />
+          {/* <Route path="/orders" element={<ProtectedRoute isUserloggedIn={payload?.role as string} children={<Order />} />} /> */}
           <Route path="/pay" element={<ProtectedRoute isUserloggedIn={payload?.role as string} children={<Checkout />} />} />
           <Route path="/shipping" element={<ProtectedRoute isUserloggedIn={payload?.role as string} children={<Shipping />} />} />
+          <Route path="/orders" element={<Order />} />
+          <Route path="/allorders" element={<AllOrders />} />
+          <Route path="/payy" element={<Checkout />} />
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

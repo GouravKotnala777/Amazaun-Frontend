@@ -16,12 +16,12 @@ const Shipping = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const formFields = [
-        {type:"text", name:"houseNo", placeHolder:"House No.", value:"ssss"},
-        {type:"text", name:"streetNo", placeHolder:"Street No.", value:"ssss"},
-        {type:"text", name:"city", placeHolder:"City.", value:"ssss"},
-        {type:"text", name:"State", placeHolder:"State.", value:"ssss"},
-        {type:"text", name:"country", placeHolder:"Country.", value:"ssss"},
-        {type:"text", name:"zipCode", placeHolder:"Zip Code.", value:"ssss"}
+        {type:"text", name:"houseNo", placeHolder:"House No.", value:shippingForm?.houseNo},
+        {type:"text", name:"streetNo", placeHolder:"Street No.", value:shippingForm?.streetNo},
+        {type:"text", name:"city", placeHolder:"City.", value:shippingForm?.city},
+        {type:"text", name:"State", placeHolder:"State.", value:shippingForm?.state},
+        {type:"text", name:"country", placeHolder:"Country.", value:shippingForm?.country},
+        {type:"text", name:"zipCode", placeHolder:"Zip Code.", value:shippingForm?.zipCode}
     ];
 
     const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +29,7 @@ const Shipping = () => {
     };
 
     const shippingFormSubmitHandler = async() => {
-        console.log(shippingForm);
+        console.log({shippingForm});
         navigate("/pay", {state:location.state});
     };
 

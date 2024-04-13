@@ -1,0 +1,28 @@
+
+.orders_cont{
+    // border: 2px solid red;
+    margin: 20px auto;
+    overflow:scroll;
+    background: white;
+    .order_table{
+        // border: 2px solid violet;
+        width: 350px;
+        padding: 10px;
+        margin:0 auto;
+        th{
+            // border: 2px solid blue;
+            padding: 5px 10px;
+        }
+        .order_cont{
+            // border: 2px solid green;
+            text-align: center;
+            td{
+                // border: 2px solid blue;
+                padding: 5px 10px;
+                img{
+                    width: 30px;
+                }
+            }
+        }
+    }
+}

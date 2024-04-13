@@ -34,60 +34,28 @@ const Register = () => {
     };
 
     const register = async() => {
-        if (avatar && registerForm?.name && registerForm?.email && registerForm?.password && registerForm?.mobile) {
-            const formData = new FormData();
-            formData.append("file", avatar);
-            formData.append("upload_preset", "chat-app");
-            formData.append("cloud_name", "dx4comsu3");
+        // if (avatar && registerForm?.name && registerForm?.email && registerForm?.password && registerForm?.mobile) {
+        const formData = new FormData();
+        formData.append("name", registerForm?.name as string);
+        formData.append("email", registerForm?.email as string);
+        formData.append("password", registerForm?.password as string);
+        formData.append("mobile", registerForm?.mobile as string);
+        formData.append("avatar", avatar as File);
 
-            try {
-                const resAvatar = await fetch("https://api.cloudinary.com/v1_1/dx4comsu3/image/upload", {
-                    method: "POST",
-                    body: formData
-                });
-                const submittedAvatar = await resAvatar.json();
+        try {
 
-                if (submittedAvatar.secure_url) {
-                    console.log("----Register.tsx  cloudinary");
-                    console.log(submittedAvatar);
-                    console.log("----Register.tsx  cloudinary");
-                }else{
-                    console.log("Failed to upload image to Cloudinary");
-                }
-
-
-
-                
-
-                const res = await fetch("http://localhost:8000/api/v1/user/new", {
-                    method:"POST",
-                    headers:{
-                        "Content-Type":"application/json"
-                    },
-                    body:JSON.stringify({name:registerForm?.name, email:registerForm?.email, password:registerForm?.password, mobile:registerForm?.mobile, avatar:submittedAvatar.url})
-                });
-
-                if (res.ok) {
-                    const data = await res.json();
-                    console.log("----- AddProduct.tsx  AddNewProduct");
-                    console.log(data);
-                    console.log("----- AddProduct.tsx  AddNewProduct");
-                    // Now you can extract the image URL from the Cloudinary res
-                    // const imageUrl = data.secure_url;
-                    // Do something with the imageUrl, like saving it in your database or displaying it in your UI
-                } else {
-                    console.log("Failed to Register User");
-
-                }
-
-            } catch (error) {
-                console.error("Error From Register", error);
-            }
-        }
-        else{
-            console.log("All fields are required");
-            console.log({name:registerForm?.name, email:registerForm?.email, password:registerForm?.password, mobile:registerForm?.mobile, avatar});
+            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/new`, {
+                method:"POST",
+                body:formData
+            });
+            const data = await res.json();
             
+            console.log("----- AddProduct.tsx  AddNewProduct");
+            console.log(data);
+            console.log("----- AddProduct.tsx  AddNewProduct");            
+        }
+        catch(error){
+            console.log(error);            
         }
 
     };

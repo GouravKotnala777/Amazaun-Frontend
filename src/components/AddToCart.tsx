@@ -19,7 +19,7 @@ const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, h
     const addToCart = async() => {
         try {
             setIsAddBtnActive(true);
-            const res = await fetch("http://localhost:8000/api/v1/cart/add", {
+            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/cart/add`, {
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"
@@ -46,7 +46,7 @@ const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, h
     }
     const removeFromCart = async() => {
         try {
-            const res = await fetch("http://localhost:8000/api/v1/cart/remove", {
+            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/cart/remove`, {
                 method:"DELETE",
                 headers:{
                     "Content-Type":"application/json"
@@ -72,7 +72,7 @@ const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, h
     const buyProduct = async() => {
         try {
             setIsBuyBtnActive(true);
-            const res = await fetch(`http://localhost:8000/api/v1/payment/new`, {
+            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/payment/new`, {
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"
@@ -89,7 +89,7 @@ const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, h
 
             if (data.success) {
                 setIsBuyBtnActive(false);
-                navigate("/shipping", {state:data})
+                navigate("/shipping", {state:{clientSecret:data.message, productID, quantity}})
                 // <Navigate to="/shipping" />
             }
             else{

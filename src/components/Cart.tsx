@@ -61,7 +61,7 @@ const Cart = ({homeCheck}:{homeCheck:boolean;}) => {
 
     const getMyCartProducts = async() => {
         try {
-            const res = await fetch("http://localhost:8000/api/v1/cart/mycart", {
+            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/cart/mycart`, {
                 method:"GET",
                 headers:{
                     "Content-Type":"application/json"

@@ -4,8 +4,8 @@ import Form from "./components/Form";
 interface AddProductFormTypes{
     productType?:string;
     name?:string;
-    price?:number;
-    stock?:number;
+    price?:string;
+    stock?:string;
 }
 
 const AddProduct = () => {
@@ -36,51 +36,26 @@ const AddProduct = () => {
     const addNewProduct = async() => {
         if (productPhoto && addProductForm?.productType && addProductForm?.name && addProductForm?.price && addProductForm?.stock) {
             const formData = new FormData();
-            formData.set("file", productPhoto);
-            formData.set("upload_preset", "chat-app");
-            formData.set("cloud_name", "dx4comsu3");
+            formData.set("productType", addProductForm.productType as string);
+            formData.set("name", addProductForm.name as string);
+            formData.set("price", addProductForm.price as string);
+            formData.set("stock", addProductForm.stock as string);
+            formData.set("photo", productPhoto as File);
 
             try {
-                const resProductPhoto = await fetch("https://api.cloudinary.com/v1_1/dx4comsu3/image/upload", {
+                const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/product/new`, {
                     method:"POST",
-                    body:formData
-                });
-                
-                const submittedProductPhoto = await resProductPhoto.json();
-
-                console.log(submittedProductPhoto);
-                
-                if (submittedProductPhoto.secure_url) {
-                    console.log("----AddProduct.tsx  cloudinary");
-                    console.log(submittedProductPhoto);
-                    console.log("----AddProduct.tsx  cloudinary");
-                }else{
-                    console.log("Failed to upload productPhoto to Cloudinary");
-                }
-
-                const res = await fetch("http://localhost:8000/api/v1/product/new", {
-                    method:"POST",
-                    headers:{
-                        "Content-Type":"application/json"
-                    },
                     credentials:"include",
-                    body:JSON.stringify({productType:addProductForm?.productType, name:addProductForm?.name, price:addProductForm?.price, stock:addProductForm?.stock, photo:submittedProductPhoto.url})
+                    body:formData
+                    // body:JSON.stringify({productType:addProductForm?.productType, name:addProductForm?.name, price:addProductForm?.price, stock:addProductForm?.stock, photo:submittedProductPhoto.url})
                 });
 
                 const data = await res.json();
 
-                if (data.success) {
-                    // console.log({productType:addProductForm?.productType, name:addProductForm?.name, price:addProductForm?.price, stock:addProductForm?.stock, photo:submittedProductPhoto.secure_url});
-                    console.log("----- AddProduct.tsx  AddNewProduct");
-                    console.log(data);
-                    console.log("----- AddProduct.tsx  AddNewProduct");
-                }
-                else{
-                    await fetch(`https://api.cloudinary.com/v1_1/dx4comsu3/image/destroy/${submittedProductPhoto.public_id}`, {
-                        method: "DELETE"
-                    });
-                    console.log("Image deleted from Cloudinary");
-                }
+                console.log("----- AddProduct.tsx  AddNewProduct");
+                console.log(data);
+                console.log("----- AddProduct.tsx  AddNewProduct");
+                
             } catch (error) {
                 console.log(error);
             }
@@ -88,7 +63,6 @@ const AddProduct = () => {
         else{
             console.log("All fields are required");
             console.log({productType:addProductForm?.productType, name:addProductForm?.name, price:addProductForm?.price, stock:addProductForm?.stock, photo:productPhoto});
-            
         }
         
     };

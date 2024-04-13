@@ -28,7 +28,7 @@ const Review = () => {
 
     const reviewSubmitHandler = async() => {
         try {
-            const res = await fetch("http://localhost:8000/api/v1/product/review", {
+            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/product/review`, {
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"
