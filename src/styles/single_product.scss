@@ -18,12 +18,27 @@
             width: 100%;
         }
         .wishlist_system_cont{
+            // border: 2px solid red;
             display: flex;
             align-items: center;
+            position: relative;
+            width: 100px;
+            .heart_icon{
+                // border: 2px solid greenyellow;
+                width:18px;
+                height:18px;
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
             .wishlist_checkbox{
                 // border: 2px solid greenyellow;
                 width:20px;
                 height:20px;
+                position: absolute;
+                top: -4px;
+                right: -4px;
+                opacity: 0;
             }
         }
     }
@@ -35,20 +50,28 @@
         width: 300px;
         .detail_cont{
             // border:2px solid green;
+            font-size: 14px;
             display: flex;
             justify-content: space-between;
             margin: 10px 0;
             
             .detail_heading{
                 // border:2px solid yellow;
-                font-size: 18px;
                 font-weight: bold;
                 color: #515151;
             }
             .detail_value{
                 // border:2px solid red;
-                font-size: 18px;
                 color: #424242;
+                width: 40%;
+                text-align: right;
+                .write_review_btn{
+                    border: 1px solid $primary;
+                    background: transparent;
+                    color: $primary;
+                    padding: 10px;
+                    border-radius: 4px;
+                }
             }
         }
     }
@@ -80,8 +103,9 @@
             img{
                 // border: 2px solid green;
                 width:80px;
-                border-radius:3rem;
-                background: red;
+                height: 80px;
+                border-radius:50%;
+                // background: red;
             }
         }
         .user_detail{

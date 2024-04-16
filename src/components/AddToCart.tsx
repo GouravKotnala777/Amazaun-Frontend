@@ -32,7 +32,13 @@ const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, h
     
             console.log("-------  Home.tsx  addToCart");
             console.log(data);
-            reloadFunction&&reloadFunction();
+            
+            if (data.success) {
+                reloadFunction&&reloadFunction();
+            }
+            if (data.success === false && data.message === "Unauthorized request") {
+                navigate("/login");
+            }
             console.log("-------  Home.tsx  addToCart");
             setIsAddBtnActive(false);
             
@@ -59,7 +65,12 @@ const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, h
     
             console.log("-------  Home.tsx  removeFromCart");
             console.log(data);
-            reloadFunction&&reloadFunction();
+            if (data.success) {
+                reloadFunction&&reloadFunction();
+            }
+            if (data.success === false && data.message === "Unauthorized request") {
+                navigate("/login");
+            }
             console.log("-------  Home.tsx  removeFromCart");
             
         } catch (error) {

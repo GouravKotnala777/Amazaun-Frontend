@@ -1,5 +1,4 @@
 import "./styles/home.scss";
-import reactLogo from "/logo192.png";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import NotFound from "./components/NotFound";
@@ -65,6 +64,7 @@ export interface AllProductsTypes {
     stock:number;
     wishlistedUsers:string[];
     _id:string;
+    photo:string;
 }
 
 
@@ -158,8 +158,11 @@ function Home({homeCheck}:{homeCheck:boolean}) {
         }
     }, [isFilterDialogOpen]);
     useEffect(() => {
-        if (searchInpValue.name === "" && searchInpValue.productType === "") {
+        if (searchInpValue.name !== "" && searchInpValue.productType !== "") {
             fetchingAllProductsWithSearchedQueries();
+        }
+        if (searchInpValue.name === "" && searchInpValue.productType === "") {
+            fetchingAllProducts();
         }
     }, [searchInpValue]);
 
@@ -189,7 +192,7 @@ function Home({homeCheck}:{homeCheck:boolean}) {
                         (
                             <div className="product_cont" key={index}>
                                 <Link to={`/product/${product._id}`} className="product_cont_link">
-                                    <img src={reactLogo} alt={reactLogo} className="product_img" />
+                                    <img src={product.photo ? product.photo : "https://res.cloudinary.com/dx4comsu3/image/upload/v1713257241/Products/dn629rcg2l2ycqezgab1.png"} alt={product.photo.split("/Products/")[1]} className="product_img" />
                                     <div className="product_detailes">{product.name}</div>
                                     <div className="product_detailes">{product.price}</div>
                                     <div className="product_detailes">{product.stock}</div>

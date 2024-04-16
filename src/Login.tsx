@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 import Form from "./components/Form";
 import { userExist } from "./redux/reducers/userReducer";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { useDispatch } from "react-redux";
 
 interface LoginFormTypes {
@@ -73,6 +73,7 @@ const Login = () => {
     return(
         <>
             <Form formHeading="Login" formFields={formFields} onChangeFunc={inputChangeHandler} onClickFunc={login} />
+            <Link to="/forgetpasswordpre">forget password</Link>
         </>
     )
 };

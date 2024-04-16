@@ -22,6 +22,10 @@ import ProtectedRoute from "./components/ProtectedRoute"
 import PageNotFound from "./components/PageNotFound"
 import Order from "./Order"
 import AllOrders from "./AllOrders"
+import VerifyEmail from "./VerifyEmail"
+// import ForgetPassword from "./FrogetPassword"
+import ForgetPasswordPre from "./ForgetPasswordPre"
+import ForgetPassword from "./FrogetPassword"
 
 
 function App() {
@@ -129,6 +133,9 @@ function App() {
           <Route path="/orders" element={<Order />} />
           <Route path="/allorders" element={<AllOrders />} />
           <Route path="/payy" element={<Checkout />} />
+          <Route path="/forgetpasswordpre" element={<ForgetPasswordPre />} />
+          <Route path="/forgetpassword/:email" element={<ForgetPassword />} />
+          <Route path="/verifyemail" element={<VerifyEmail />} />
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
