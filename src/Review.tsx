@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import Form from "./components/Form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 interface ReviewFormTypes {
@@ -12,6 +12,7 @@ interface ReviewFormTypes {
 const Review = () => {
     const [reviewForm, setReviewForm] = useState<ReviewFormTypes>();
     const {productID} = useParams();
+    const navigate = useNavigate();
     
     const formFields = [
         {type:"number", name:"rating", placeHolder:"Rating", value:reviewForm?.rating},
@@ -41,6 +42,9 @@ const Review = () => {
             
             console.log("------  Review.tsx  reviewSubmitHandler");
             console.log(data);
+            if (data.success) {
+                navigate(`/product/${productID}`);
+            }
             console.log("------  Review.tsx  reviewSubmitHandler");
             
         } catch (error) {

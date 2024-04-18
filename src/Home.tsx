@@ -144,8 +144,16 @@ function Home({homeCheck}:{homeCheck:boolean}) {
                 setSearchInpValue({name:"", productType:""});
             }
         }
+        console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+        
     };
 
+    
+    useEffect(() => {
+        if (isFilterDialogOpen) {
+            filterHandler();
+        }
+    }, [homeCheck]);
     useEffect(() => {
         fetchingAllProducts();
     }, []);
@@ -176,13 +184,15 @@ function Home({homeCheck}:{homeCheck:boolean}) {
             </div>
         </div>
         <div className="home_cont">
-            <dialog className="home_tools_cont" open={isFilterDialogOpen}>
-                <div className="home_tools">
-                    <label>Search By Name</label>
-                    <input type="search" name="name" value={searchInpValue.name} onChange={(e) => {setSearchInpValue({...searchInpValue, [e.target.name]:e.target.value})}} />
-                    <label>Search By Product Type</label>
-                    <input type="search" name="productType" value={searchInpValue.productType} onChange={(e) => {setSearchInpValue({...searchInpValue, [e.target.name]:e.target.value})}} />
-                    <button onClick={() => {isFilterActive?setIsFilterDialogOpen(false):""; fetchingAllProductsWithSearchedQueries();}}>Filter</button>
+            <dialog className="home_tools_dialog" open={isFilterDialogOpen} style={{zIndex:isFilterDialogOpen?"22":"18"}}>
+                <div className="home_tools_cont">
+                    <div className="home_tools">
+                        <label>Search By Name</label>
+                        <input type="search" name="name" value={searchInpValue.name} onChange={(e) => {setSearchInpValue({...searchInpValue, [e.target.name]:e.target.value})}} />
+                        <label>Search By Product Type</label>
+                        <input type="search" name="productType" value={searchInpValue.productType} onChange={(e) => {setSearchInpValue({...searchInpValue, [e.target.name]:e.target.value})}} />
+                        <button onClick={() => {isFilterActive?setIsFilterDialogOpen(false):""; fetchingAllProductsWithSearchedQueries();}}>Filter</button>
+                    </div>
                 </div>
             </dialog>
             {

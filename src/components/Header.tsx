@@ -10,13 +10,16 @@ function Header({payload}:{payload:LoginedUserType|null}) {
   return (
     <>
         <div className="header_cont">
-          <span className="user_name_mobile">{payload?.name && `Hi ${payload?.name}`}</span>
-          <img src={logo} alt={logo} />
+          <span className="user_name_mobile">
+            {payload?.name ? `Hi ${payload?.name}` : <NavLink to="/login" className="header_navlink">Login</NavLink>}
+          </span>
+          <NavLink to="/" className="header_navlink">
+            <img src={logo} alt={logo} />
+          </NavLink>
 
           
           <div className="navbar_cont">
             <span className="user_name_pc">{payload?.name && `Hi ${payload?.name}`}</span>
-            <NavLink to="/" className="header_navlink">Home</NavLink>
             {
               payload?.role === "admin" &&
                 <NavLink to="/product/new" className="header_navlink">Add Product</NavLink>

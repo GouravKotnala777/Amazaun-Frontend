@@ -45,7 +45,7 @@ const Logout = () => {
         <>
             <div className="logout_cont">
                 <h3>Do you want to Logout!</h3>
-                <input type="checkbox" onChange={() => setCheckBoxValue(!checkBoxValue)} />
+                <input type="checkbox" onChange={() => setCheckBoxValue(!checkBoxValue)} style={{zIndex:"19"}}/>
                 <button onClick={logoutHandler}>Logout</button>
             </div>
         </>

@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { AllProductsTypes } from "./Home";
 import "./styles/single_product.scss";
-import AddToCart from "./components/AddToCart";
+// import AddToCart from "./components/AddToCart";
 import { InitialStateType } from "./redux/reducers/userReducer";
 import { useSelector } from "react-redux";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 import RatingStar from "./components/RatingStar";
+import ProductContainer from "./components/ProductContainer";
 
 // interface ProductType {
 
@@ -17,7 +18,7 @@ const SingleProduct = ({homeCheck}:{homeCheck:boolean;}) => {
     const [product, setProduct] = useState<{success:boolean; message:AllProductsTypes}>();
     const [isCheckBoxChecked, setIsCheckBoxChecked] = useState<boolean>();
     const {payload} = useSelector((state:{userReducer:InitialStateType}) => state.userReducer)
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const getSingleProduct = async() => {
         try {
@@ -90,14 +91,14 @@ const SingleProduct = ({homeCheck}:{homeCheck:boolean;}) => {
         {/* <button onClick={addToWishlist}>POST</button> */}
         {/* <pre>{JSON.stringify(product?.message, null, `\t`)}</pre> */}
         {/* <pre>{JSON.stringify(isWishlisted, null, `\t`)}</pre> */}
-            <div className="product_cont">
+
+            {/* <div className="product_cont">
                 <div className="image_cont">
                     <img src={product?.message.photo} alt={product?.message.photo.split("/Products/")[1]} />
                     <div className="wishlist_system_cont">
                         <span>add to wishlist</span>
                         <BsHeart className="heart_icon" display={isCheckBoxChecked?"none":"block"} />
                         <BsHeartFill className="heart_icon" color="red" display={isCheckBoxChecked?"block":"none"} />
-                        <input id="wishlist_checkbox" type="checkbox" className="wishlist_checkbox" onClick={addToWishlist} />
                     </div>
                 </div>
                 <div className="details_cont">
@@ -114,14 +115,31 @@ const SingleProduct = ({homeCheck}:{homeCheck:boolean;}) => {
                         <div className="detail_heading">Stock</div><div className="detail_value">{product?.message.stock}</div>
                     </div>
                     <div className="detail_cont">
-                        {/* <div className="detail_heading">Reviews</div><div className="detail_value">{product?.message.reviews}</div> */}
                     </div>
                     <AddToCart homeCheck={homeCheck} productAmount={product?.message.price as number} productID={product?.message._id as string} haveQunatityInp={true} />
                     <div className="detail_cont">
                         <div className="detail_heading">Review this product</div><div className="detail_value"><button className="write_review_btn" onClick={() => navigate(`/review/${productID}`)}>Review</button></div>
                     </div>
                 </div>
+            </div> */}
+
+            <div className="product_cont">
+                <div className="wishlist_system_cont">
+                    <span>add to wishlist</span>
+                    <BsHeart className="heart_icon" display={isCheckBoxChecked?"none":"block"} />
+                    <BsHeartFill className="heart_icon" color="red" display={isCheckBoxChecked?"block":"none"} />
+                    <input id="wishlist_checkbox" type="checkbox" className="wishlist_checkbox" onClick={addToWishlist} />
+                </div>
+                <ProductContainer homeCheck={homeCheck} hasReviewBtn={true}  productAmount={product?.message.price as number} productID={product?.message._id} haveQunatityInp={true}
+                    fieldsHeadingArray={[
+                        "Product Type", "Name", "Price", "Stock"
+                        ]}
+                    fieldsValueArray={[
+                        product?.message.productType, product?.message.name, product?.message.price, product?.message.stock
+                        ]}
+                />
             </div>
+
 
             <div className="reviews_cont">
                 <div className="review_heading">
@@ -156,13 +174,13 @@ const SingleProduct = ({homeCheck}:{homeCheck:boolean;}) => {
                     product?.message.reviews.map((review, index) => (
                         <div className="review_cont" key={index}>
                             <div className="user_photo_cont">
-                                <img src={review.user.avatar?review.user.avatar:"https://res.cloudinary.com/dx4comsu3/image/upload/v1713260670/Avatars/t0qlyva2ss0jm2evdcr7.png"} alt={review.user.avatar.split("/Avatars/")[1]} />
+                                <img src={review.user.avatar?review.user.avatar:"https://res.cloudinary.com/dx4comsu3/image/upload/v1713260670/Avatars/t0qlyva2ss0jm2evdcr7.png"} alt={review.user.avatar?review.user.avatar.split("/Avatars/")[1]:"t0qlyva2ss0jm2evdcr7.png"} />
                             </div>
                             <div className="user_detail">
                                 <div className="user_email">gouravKotnala777adaddaasdsda.gemail.com</div>
                                 <div className="rating">{review.rating}
 
-                                <RatingStar rating={4} />
+                                <RatingStar rating={review.rating} />
 
                                 {/* <BiStar /><BsStarFill/><BsStarHalf/> */}
                                 </div>

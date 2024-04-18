@@ -37,9 +37,6 @@ const Shipping = () => {
 
     return(
         <>
-            <button onClick={() => {
-                console.log(location.state);
-            }}>Fetch Location Data</button>
             <Form formHeading="Shipping Address" formFields={formFields} onChangeFunc={onChangeHandler} onClickFunc={shippingFormSubmitHandler} />
         </>
     )

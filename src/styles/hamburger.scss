@@ -3,14 +3,19 @@
 
 
 .hamburger_side_cont{
-    // border: 2px solid rgb(0, 255, 81);
+    // border: 2px solid rgb(0, 0, 0);
     width: 70%;
-    height: 101%;
+    height:108%;
     font-size: 24px;
     // background: gainsboro;
     // z-index: 20;
     display: none;
-    
+    overflow-y: scroll;
+    overflow-x: hidden;
+    .hamburger_side{
+        .ham_navlink{
+        }
+    }
 }
 
 
@@ -23,16 +28,20 @@
 @media screen and (width <= 570px) {
     .hamburger_side_cont{
         // border: 2px solid rgb(255, 0, 43);
-        display: flex;
+        display: block;
         background: white;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
         z-index: 26;
-        .ham_navlink{
-            font-size: 20px;
-            color: black;
-            text-decoration: none;
+        .hamburger_side{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            .ham_navlink{
+                font-size: 16px;
+                color:#515151;
+                text-decoration: none;
+                padding: 20px 0;
+            }
         }
     }
 }

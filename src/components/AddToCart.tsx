@@ -144,7 +144,7 @@ const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, h
                 }
                 {
                     productID&&productAmount ?
-                        <button onClick={() => {!isAddBtnActive&&!isBuyBtnActive&&buyProduct()}}>{isBuyBtnActive?<Loader size={13} borderWidth={3} color="#ff3153" /> : "Buy"}</button>
+                        <button onClick={() => {!isAddBtnActive&&!isBuyBtnActive&&buyProduct()}}>{isBuyBtnActive?<Loader size={13} borderWidth={3} color="#ff824d" /> : "Buy"}</button>
                         :
                         <Skeleton width={30} />
                 }

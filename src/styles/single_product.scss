@@ -4,75 +4,35 @@
     // border:2px solid red;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     padding: 20px;
     flex-wrap:wrap;
-    .image_cont{
-        // border:2px solid violet;
+    .wishlist_system_cont{
+        // border: 2px solid red;
         display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        width: 300px;
-        img{
-            // border:2px solid indigo;
-            // width: 300px;
-            width: 100%;
+        align-items: center;
+        position: relative;
+        width: 115px;
+        margin-left: auto;
+        span{
+            padding:5px;
         }
-        .wishlist_system_cont{
-            // border: 2px solid red;
-            display: flex;
-            align-items: center;
-            position: relative;
-            width: 100px;
-            .heart_icon{
-                // border: 2px solid greenyellow;
-                width:18px;
-                height:18px;
-                position: absolute;
-                top: 0;
-                right: 0;
-            }
-            .wishlist_checkbox{
-                // border: 2px solid greenyellow;
-                width:20px;
-                height:20px;
-                position: absolute;
-                top: -4px;
-                right: -4px;
-                opacity: 0;
-            }
+        .heart_icon{
+            // border: 2px solid greenyellow;
+            width:18px;
+            height:18px;
+            position: absolute;
+            top: 4px;
+            right: 0;
         }
-    }
-    .details_cont{
-        // border:2px solid blue;
-        display: flex;
-        flex-direction: column;
-        max-width: 300px;
-        width: 300px;
-        .detail_cont{
-            // border:2px solid green;
-            font-size: 14px;
-            display: flex;
-            justify-content: space-between;
-            margin: 10px 0;
-            
-            .detail_heading{
-                // border:2px solid yellow;
-                font-weight: bold;
-                color: #515151;
-            }
-            .detail_value{
-                // border:2px solid red;
-                color: #424242;
-                width: 40%;
-                text-align: right;
-                .write_review_btn{
-                    border: 1px solid $primary;
-                    background: transparent;
-                    color: $primary;
-                    padding: 10px;
-                    border-radius: 4px;
-                }
-            }
+        .wishlist_checkbox{
+            // border: 2px solid greenyellow;
+            width:20px;
+            height:20px;
+            position: absolute;
+            top: 0px;
+            right: -3px;
+            opacity: 0;
         }
     }
 }
@@ -134,6 +94,9 @@
 
 
 @media screen and (width <= 570px) {
+    // .product_cont{
+    //     gap: 3rem;
+    // }
     .reviews_cont{
         .review_cont{
             .user_detail{

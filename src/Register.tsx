@@ -1,5 +1,7 @@
+import "./styles/login.scss";
 import { ChangeEvent, useState } from "react";
 import Form from "./components/Form";
+import { Link } from "react-router-dom";
 
 interface RegisterFormTypes{
     name?:string;
@@ -63,6 +65,9 @@ const Register = () => {
     return(
         <>
             <Form formHeading="Register" formFields={formFields} onChangeFunc={inputChangeHandler} onClickFunc={register} />
+            <div className="login_links_cont">
+                <Link to="/register" className="login_links">Already have account?</Link>
+            </div>
         </>
     )
 };

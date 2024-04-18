@@ -1,3 +1,4 @@
+import "./styles/login.scss";
 import { ChangeEvent, useState } from "react";
 import Form from "./components/Form";
 import { userExist } from "./redux/reducers/userReducer";
@@ -73,7 +74,10 @@ const Login = () => {
     return(
         <>
             <Form formHeading="Login" formFields={formFields} onChangeFunc={inputChangeHandler} onClickFunc={login} />
-            <Link to="/forgetpasswordpre">forget password</Link>
+            <div className="login_links_cont">
+                <Link to="/register" className="login_links">Don't have account?</Link> <span>Or </span>
+                <Link to="/forgetpasswordpre" className="login_links">forget password?</Link>
+            </div>
         </>
     )
 };
