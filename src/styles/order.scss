@@ -1,12 +1,45 @@
+@import "./colors";
 
 .orders_cont{
     // border: 2px solid red;
     margin: 20px auto;
     overflow:scroll;
     background: white;
+    position: relative;
+    .order_dialog{
+        // border: 2px solid red;
+        width: 150px;
+        // border: none;
+        position: absolute;
+        top: 30%;
+        left: 0%;
+        .order_dialog_close_btn{
+            // border: 2px solid violet;
+            margin-left: 84%;
+            cursor: pointer;
+        }
+        .image_cont{
+            // border: 2px solid indianred;
+            img{
+                width: 100%;
+            }
+        }
+        .details_cont{
+            // border: 2px solid indigo;
+            .detail_cont{
+                // border: 2px solid blue;
+                .detail_heading{
+                    // border: 2px solid green;
+                }
+                .detail_value{
+                    // border: 2px solid yellow;
+                }
+            }
+        }
+    }
     .order_table{
         // border: 2px solid violet;
-        width: 350px;
+        width: 450px;
         padding: 10px;
         margin:0 auto;
         th{
@@ -16,6 +49,10 @@
         .order_cont{
             // border: 2px solid green;
             text-align: center;
+            cursor: pointer;
+            &:hover{
+                color: $primary;
+            }
             td{
                 // border: 2px solid blue;
                 padding: 5px 10px;

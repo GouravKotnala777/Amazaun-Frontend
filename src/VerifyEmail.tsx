@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Loader from "./components/Loader";
 
 
 "         http://127.0.0.1:5173/verifyemail?token=    adasdada&?emailtype=       asdasdas       "
@@ -11,12 +12,16 @@ const VerifyEmail = () => {
     const [token, setToken] = useState<string>("");
     const [emailType, setEmailType] = useState<string>("");
     const [newPassword, setNewPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
     // const {token, emailtype} = useParams();
     const [verified, setVerified] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
+    const [isProcessing, setIsProcessing] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const verifyUserEmail = async(newPassword:string|undefined) => {
         try {
+            setIsProcessing(true);
             const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/verifyemail?token=${token}`, {
             // const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/verifyemail`, {
                 method:"POST",
@@ -33,14 +38,17 @@ const VerifyEmail = () => {
             console.log(data);
             if (data.success) {
                 setVerified(true);
+                navigate("/login");
             }
             console.log("--------  VerifyEmail.tsx  verifyUserEmail");
+            setIsProcessing(false);
             
         } catch (error) {
             console.log("--------  VerifyEmail.tsx  verifyUserEmail");
             console.log(error);
             setError(true);
             console.log("--------  VerifyEmail.tsx  verifyUserEmail");
+            setIsProcessing(false);
         }
     };
 
@@ -59,10 +67,9 @@ const VerifyEmail = () => {
 
     return(
         <>
-            <div>
-                <h1>Verify Email</h1>
-                <h3>{token ? token : "No Token"}</h3>
-                <h3>{emailType ? emailType : "No emailType"}</h3>
+            <div style={{textAlign:"center"}}>
+                <h3>{!token&&"No Token"}</h3>
+                <h3>{!emailType&&"No emailType"}</h3>
                 {
                     verified && (
                         <div>
@@ -75,10 +82,12 @@ const VerifyEmail = () => {
                 }
                 {
                     emailType === "RESET" ?
-                        <>
-                            <input type="text" name="password" onChange={(e) => setNewPassword(e.target.value)} />
-                            <button onClick={() => newPassword&&verifyUserEmail(newPassword)}>Reset Password</button>
-                        </>
+                        <div style={{display:"flex", flexDirection:"column"}}>
+                            <h2>Change Password</h2>
+                            <input type="text" name="password" placeholder="New Password" style={{border:"1px solid #ff3153", outline:"none", borderRadius:"4px", margin:"10px auto", padding:"10px"}} onChange={(e) => setNewPassword(e.target.value)} />
+                            <input type="text" name="confirm_password" placeholder="Confirm Password" style={{border:"1px solid #ff3153", outline:"none", borderRadius:"4px", margin:"10px auto", padding:"10px"}} onChange={(e) => setConfirmPassword(e.target.value)} />
+                            <button style={{background:"linear-gradient(to bottom right, #ffb1be, #ff3153)", margin:"10px auto", border:"none", padding:"10px", color:"white", fontWeight:"bold", borderRadius:"4px", cursor:"pointer"}} onClick={() => {newPassword&&newPassword===confirmPassword&&verifyUserEmail(newPassword)}}>{isProcessing?<Loader size={13} borderWidth={3} color="#ff3153" />:"Reset Password"}</button>
+                        </div>
                         :
                         <>
                         it is for verification

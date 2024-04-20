@@ -22,7 +22,10 @@ function Header({payload}:{payload:LoginedUserType|null}) {
             <span className="user_name_pc">{payload?.name && `Hi ${payload?.name}`}</span>
             {
               payload?.role === "admin" &&
-                <NavLink to="/product/new" className="header_navlink">Add Product</NavLink>
+                <>
+                  <NavLink to="/product/new" className="header_navlink">Add Product</NavLink>
+                  <NavLink to="/allorders" className="header_navlink">All Orders</NavLink>
+                </>
             }
             {
               !payload?.name &&
@@ -34,6 +37,7 @@ function Header({payload}:{payload:LoginedUserType|null}) {
             {
               payload?.name && 
               <>
+                <NavLink to="/orders" className="header_navlink">Orders</NavLink>
                 <NavLink to="/logout" className="header_navlink">Logout</NavLink>
                 <NavLink to="/cart" className="header_navlink">Cart</NavLink>
               </>

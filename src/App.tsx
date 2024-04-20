@@ -103,8 +103,8 @@ function App() {
     {/* <button onClick={fetchLoggedInUser}>Fetch LoggedIn User</button>
     <pre>{JSON.stringify(loggedInUser, null, `\t`)}</pre> */}
       <BrowserRouter>
-        <div className="ham_inp_wrapper" style={{left:homeCheck ? "0%" : "-76%", background:homeCheck ? "rgba(0, 0, 0, 0.672)" : "rgba(0, 0, 0, 0)", zIndex:homeCheck ? "21" : "19", transition:"0.5s"}}>
-          <Hamburger homeCheck={homeCheck} onClose={() => setHomeCheck(false)} />
+        <div className="ham_inp_wrapper" style={{left:homeCheck ? "0%" : "-76%", background:homeCheck ? "rgba(0, 0, 0, 0.672)" : "rgba(0, 0, 0, 0)", zIndex:homeCheck ? "21" : "-1", transition:"0.5s"}}>
+          <Hamburger payload={payload} onClose={() => setHomeCheck(false)} />
           <div className="ham_close_area" onClick={() => setHomeCheck(false)}>
             <CgClose className="CgClose" style={{display:homeCheck ? "block" : "none"}} />
           </div>
@@ -124,7 +124,7 @@ function App() {
           <Route path="/register" element={!payload?._id?<Register />:<NotFound subject="Page" />} />
           <Route path="/login" element={!payload?._id?<Login />:<NotFound subject="Page" />} />
 
-        //  If user is loggedin not if loggedout
+        //  If user is loggedin and isAdmin
           <Route path="/logout" element={<ProtectedRoute isUserloggedIn={payload?.role as string} children={<Logout />} />} />
           <Route path="/cart" element={<ProtectedRoute isUserloggedIn={payload?.role as string} children={<Cart homeCheck={homeCheck} />} />} />
           {/* <Route path="/orders" element={<ProtectedRoute isUserloggedIn={payload?.role as string} children={<Order />} />} /> */}
@@ -132,7 +132,6 @@ function App() {
           <Route path="/shipping" element={<ProtectedRoute isUserloggedIn={payload?.role as string} children={<Shipping />} />} />
           <Route path="/orders" element={<Order />} />
           <Route path="/allorders" element={<AllOrders />} />
-          <Route path="/payy" element={<Checkout />} />
           <Route path="/forgetpasswordpre" element={<ForgetPasswordPre />} />
           <Route path="/forgetpassword/:email" element={<ForgetPassword />} />
           <Route path="/verifyemail" element={<VerifyEmail />} />

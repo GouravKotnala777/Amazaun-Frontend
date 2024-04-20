@@ -1,3 +1,4 @@
+import "./styles/checkout.scss";
 import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { FormEvent, useState } from "react";
@@ -88,10 +89,10 @@ const CheckOutForm = ({productID, quantity}:{productID:string; quantity:number;}
     };
 
     return(
-        <div className="checkout-container">
-            <form onSubmit={submitHandler}>
+        <div className="checkout_container">
+            <form onSubmit={submitHandler} >
                 <PaymentElement />
-                <button disabled={isProcessing}>{isProcessing ? "Processing..." : "Pay"}</button>
+                <button className="payment_btn" disabled={isProcessing} onClick={() => {console.log("Checkout button has clicked.......")}}>{isProcessing ? "Processing..." : "Pay"}</button>
             </form>
         </div>
     )
@@ -115,51 +116,5 @@ const Checkout = () => {
         </Elements>
     )
 };
-
-
-
-
-
-
-
-
-// const stripeKey:string = "pk_test_51Oc3xKSHf5vitJ9rEYdbqKhf7MmyOGBWIL2GJs8NDprnDtHs4QoaVNOUTDIA1mzjBxlwUgY00u6x6AhMD5OMdO4X00WbRXvaOo";
-
-// const Checkout = () => {
-//     const [product, setProduct] = useState({
-//         name:"Product1",
-//         price:111,
-
-//     });
-
-//     const makePayment = async(token:Token) => {
-//         const body = {
-//             token, product
-//         };
-//         const headers = {
-//             "Content-Type":"application/json"
-//         };
-//         return fetch("http://localhost:8000/api/v1/payment/new2", {
-//             method:"POST",
-//             headers,
-//             body:JSON.stringify(body)
-//         }).then((res) => {
-//             console.log("------ payment2");
-//             console.log(res);
-//             console.log(res.status);
-//             console.log("------ payment2");
-//             setProduct({name:"aaaa", price:201})
-//         }).catch((err) => console.log(err))
-//     };
-
-//     return(
-//         <>
-//         <StripeCheckout stripeKey={stripeKey} token={makePayment} name="Buy Anything" amount={Number(product.price)*100}>
-//             {/* <button>AAAA</button> */}
-//         </StripeCheckout>
-//         </>
-//     )
-// };
-
 
 export default Checkout;

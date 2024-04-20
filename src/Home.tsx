@@ -7,55 +7,7 @@ import { FiFilter } from "react-icons/fi";
 import { CgClose } from "react-icons/cg";
 import Skeleton from "./components/Skeleton";
 
-// const fakeData = [
-//     {
-//         "_id" : "65f5850aba1abc328100f26d",
-//         "productType" : "electronics",
-//         "name" : "Oppo A72",
-//         "price" : 10000,
-//         "stock" : 10,
-//         "wishlistedUsers" : [ ],
-//         "reviews" : [ ],
-//         "__v" : 0
-//     },
-//     {
-//         "_id" : "65f5850aba1abc328100f26d",
-//         "productType" : "electronics",
-//         "name" : "Oppo A72",
-//         "price" : 10000,
-//         "stock" : 10,
-//         "wishlistedUsers" : [ ],
-//         "reviews" : [ ],
-//         "__v" : 0
-//     },
-//     {
-//         "_id" : "65f5850aba1abc328100f26d",
-//         "productType" : "electronics",
-//         "name" : "Oppo A72",
-//         "price" : 10000,
-//         "stock" : 10,
-//         "wishlistedUsers" : [ ],
-//         "reviews" : [ ],
-//         "__v" : 0
-//     },
-//     {
-//         "_id" : "65f5850aba1abc328100f26d",
-//         "productType" : "electronics",
-//         "name" : "Oppo A72",
-//         "price" : 10000,
-//         "stock" : 10,
-//         "wishlistedUsers" : [ ],
-//         "reviews" : [ ],
-//         "__v" : 0
-//     },
-// ];
 
-// interface ReviewsTypes {
-    
-// };
-// interface WishlistdUsersTypes {
-
-// };
 export interface AllProductsTypes {
     name:string;
     price:number;

@@ -66,7 +66,7 @@ const Register = () => {
         <>
             <Form formHeading="Register" formFields={formFields} onChangeFunc={inputChangeHandler} onClickFunc={register} />
             <div className="login_links_cont">
-                <Link to="/register" className="login_links">Already have account?</Link>
+                <div className="login_links">Already have account? <Link to="/login"> Login</Link></div>
             </div>
         </>
     )

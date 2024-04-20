@@ -1,0 +1,20 @@
+@import "./colors";
+
+.checkout_container{
+    // border: 2px solid green;
+    margin: 20px 0;
+    form{
+        // border: 2px solid violet;
+        .payment_btn{
+            width: 100%;
+            font-size: 14px;
+            margin: 20px 0;
+            padding: 10px 0;
+            background: $btnBackground;
+            color: white;
+            border: none;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+    }
+}

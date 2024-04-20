@@ -1,4 +1,4 @@
-
+@import "./colors";
 
 
 
@@ -14,6 +14,7 @@
     overflow-x: hidden;
     .hamburger_side{
         .ham_navlink{
+
         }
     }
 }
@@ -32,15 +33,34 @@
         background: white;
         z-index: 26;
         .hamburger_side{
+            // border: 2px solid rgb(0, 255, 162);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            align-items: center;
-            .ham_navlink{
-                font-size: 16px;
-                color:#515151;
-                text-decoration: none;
-                padding: 20px 0;
+            // padding: 10px 40px;
+            // align-items: center;
+            span{
+                border-top: 1px solid #828282;
+            }
+            .ham_nav_heading{
+                // border: 2px solid #45c756;
+                font-size: 18px;
+                color:$primary;
+                padding: 10px 40px;
+            }
+            .routes_cont{
+                // border: 2px solid rgb(255, 0, 204);
+                display: flex;
+                flex-direction: column;
+                padding: 10px 40px;
+
+                .ham_navlink{
+                    // border: 2px solid rgb(30, 0, 255);
+                    font-size: 14px;
+                    color:#515151;
+                    text-decoration: none;
+                    padding: 10px 0;
+                }
             }
         }
     }

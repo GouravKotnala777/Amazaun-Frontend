@@ -19,11 +19,6 @@ const ProductContainer = ({homeCheck, hasReviewBtn, productAmount, productID, re
         <div className="product_container_background">
             <div className="image_cont">
                 <img src={photo} alt={photo} />
-                {/* <div className="wishlist_system_cont">
-                    <span>add to wishlist</span>
-                    <BsHeart className="heart_icon" display={isCheckBoxChecked?"none":"block"} />
-                    <BsHeartFill className="heart_icon" color="red" display={isCheckBoxChecked?"block":"none"} />
-                </div> */}
             </div>
             <div className="details_cont">
                 {
