@@ -38,7 +38,10 @@ const VerifyEmail = () => {
             console.log(data);
             if (data.success) {
                 setVerified(true);
-                navigate("/login");
+                window.location.href = "/";
+            }
+            else if (data.success === false) {
+                navigate("/page_not_found");
             }
             console.log("--------  VerifyEmail.tsx  verifyUserEmail");
             setIsProcessing(false);
@@ -47,6 +50,7 @@ const VerifyEmail = () => {
             console.log("--------  VerifyEmail.tsx  verifyUserEmail");
             console.log(error);
             setError(true);
+            navigate("/page_not_found")
             console.log("--------  VerifyEmail.tsx  verifyUserEmail");
             setIsProcessing(false);
         }
@@ -61,6 +65,9 @@ const VerifyEmail = () => {
     useEffect(() => {
         console.log(token);
         if (emailType === "VERIFY") {
+            verifyUserEmail("aaa");
+        }
+        else if (emailType === "REGISTER") {
             verifyUserEmail("aaa");
         }
     }, [token]);

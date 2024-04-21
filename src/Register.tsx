@@ -1,7 +1,7 @@
 import "./styles/login.scss";
 import { ChangeEvent, useState } from "react";
 import Form from "./components/Form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface RegisterFormTypes{
     name?:string;
@@ -22,6 +22,8 @@ const Register = () => {
     ];
     const [registerForm, setRegisterForm] = useState<RegisterFormTypes>();
     const [avatar, setAvatar] = useState<File|undefined>();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const inputChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
         if (e.target.type === "text") {
@@ -36,7 +38,7 @@ const Register = () => {
     };
 
     const register = async() => {
-        // if (avatar && registerForm?.name && registerForm?.email && registerForm?.password && registerForm?.mobile) {
+        setIsLoading(true);
         const formData = new FormData();
         formData.append("name", registerForm?.name as string);
         formData.append("email", registerForm?.email as string);
@@ -54,17 +56,20 @@ const Register = () => {
             
             console.log("----- AddProduct.tsx  AddNewProduct");
             console.log(data);
-            console.log("----- AddProduct.tsx  AddNewProduct");            
+            console.log("----- AddProduct.tsx  AddNewProduct");
+            setIsLoading(false);
+            navigate(`/forgetpassword/${registerForm?.email}`);
         }
         catch(error){
             console.log(error);            
+            setIsLoading(false);            
         }
 
     };
 
     return(
         <>
-            <Form formHeading="Register" formFields={formFields} onChangeFunc={inputChangeHandler} onClickFunc={register} />
+            <Form isLoading={isLoading} formHeading="Register" formFields={formFields} onChangeFunc={inputChangeHandler} onClickFunc={register} />
             <div className="login_links_cont">
                 <div className="login_links">Already have account? <Link to="/login"> Login</Link></div>
             </div>

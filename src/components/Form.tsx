@@ -1,5 +1,6 @@
 import "../styles/form.scss";
 import { ChangeEvent, FC } from "react";
+import Loader from "./Loader";
 
 interface FormFieldsTypes {
     type:string;
@@ -8,20 +9,14 @@ interface FormFieldsTypes {
 }
 
 interface FormPropTypes {
+    isLoading?:boolean;
     formHeading:string;
     formFields:FormFieldsTypes[];
     onChangeFunc:(e:ChangeEvent<HTMLInputElement>) => void;
     onClickFunc:() => Promise<void>;
 }
 
-
-// const formFields = [
-//     {type:"text", name:"product_type", placeHolder:"Product Type"},
-//     {type:"text", name:"product_type", placeHolder:"Product Type"},
-//     {type:"text", name:"product_type", placeHolder:"Product Type"},
-// ];
-
-const Form:FC<FormPropTypes> = ({formHeading, formFields, onChangeFunc, onClickFunc}) => {
+const Form:FC<FormPropTypes> = ({isLoading, formHeading, formFields, onChangeFunc, onClickFunc}) => {
     return(
         <>
             <div className="form_background">
@@ -38,9 +33,8 @@ const Form:FC<FormPropTypes> = ({formHeading, formFields, onChangeFunc, onClickF
                                     <input key={index} type={input.type} name={input.name} placeholder={input.placeHolder} onChange={onChangeFunc} />
                         ))
                     }
-                    {/* <input type="text" name="product_type" placeholder="Product Type" onChange={(e) => setProductType(e.target.value)}/> */}
 
-                    <button type="submit" onClick={onClickFunc}>Add</button>
+                    <button type="submit" onClick={onClickFunc}>{isLoading===true?<Loader size={15} borderWidth={3} color="#3182ce" />:formHeading}</button>
                 </div>
             </div>
         </>

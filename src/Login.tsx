@@ -39,25 +39,30 @@ const Login = () => {
     
             const data = await res.json();
             
-            if (res.ok) {
-                console.log("----- Login.tsx  login");
-                console.log(data.user);
-                dispatch(userExist({
-                    _id:data.message._id,
-                    name:data.message.name,
-                    email:data.message.email,
-                    role:data.message.role,
-                    mobile:data.message.mobile,
-                    avatar:data.message.avatar,
-                    wishlistedProducts:data.message.wishlistedProducts,
-                    reviewedProducts:data.message.reviewedProducts
-                }));
-                console.log("----- Login.tsx  login");
-                navigate("/");
+            if (data.success) {
+                if (data.message === "verify first") {
+                    
+                    navigate(`/forgetpassword/${loginForm?.email}`)
+                }
+                else{
+                    console.log("----- Login.tsx  login");
+                    console.log(data.user);
+                    dispatch(userExist({
+                        _id:data.message._id,
+                        name:data.message.name,
+                        email:data.message.email,
+                        role:data.message.role,
+                        mobile:data.message.mobile,
+                        avatar:data.message.avatar,
+                        wishlistedProducts:data.message.wishlistedProducts,
+                        reviewedProducts:data.message.reviewedProducts
+                    }));
+                    console.log("----- Login.tsx  login");
+                }
             }
             else{
                 console.log("----- Login.tsx  login");
-                console.log("Login Failed");
+                console.log(data.message);
                 console.log("----- Login.tsx  login");
             }
         } catch (error) {
