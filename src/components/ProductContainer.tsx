@@ -2,23 +2,16 @@ import "../styles/product_container.scss";
 // import { BsHeart, BsHeartFill } from "react-icons/bs";
 import AddToCart from "./AddToCart";
 import { useNavigate } from "react-router-dom";
-import photo from "/public/logo192.png";
 
 
-const ProductContainer = ({homeCheck, hasReviewBtn, productAmount, productID, reloadFunction,haveQunatityInp, hasRemoveBtn, fieldsHeadingArray, fieldsValueArray}:{homeCheck:boolean; hasReviewBtn:boolean; productAmount?:number; productID?:string; reloadFunction?:()=> Promise<void>; haveQunatityInp?:boolean; hasRemoveBtn?:boolean; fieldsHeadingArray:string[]|number[]; fieldsValueArray:(string|number|undefined)[];}) => {
+const ProductContainer = ({homeCheck, hasReviewBtn, productAmount, productPhoto, productID, reloadFunction,haveQunatityInp, hasRemoveBtn, fieldsHeadingArray, fieldsValueArray}:{homeCheck:boolean; hasReviewBtn:boolean; productAmount?:number; productPhoto?:string; productID?:string; reloadFunction?:()=> Promise<void>; haveQunatityInp?:boolean; hasRemoveBtn?:boolean; fieldsHeadingArray:string[]|number[]; fieldsValueArray:(string|number|undefined)[];}) => {
     const navigate = useNavigate();
-    // const arr = [
-    //     {heading:"Product Type", value:"aaaa"},
-    //     {heading:"Name", value:"aaaa"},
-    //     {heading:"Price", value:"aaaa"},
-    //     {heading:"Stock", value:"aaaa"}
-    // ];
-    // const isCheckBoxChecked = false;
 
     return(
         <div className="product_container_background">
+            {/* {JSON.stringify(productPhoto)} */}
             <div className="image_cont">
-                <img src={photo} alt={photo} />
+                <img src={productPhoto} alt={productPhoto ? productPhoto.split("/Products/")[1]:"img not found"} />
             </div>
             <div className="details_cont">
                 {

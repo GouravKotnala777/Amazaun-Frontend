@@ -91,38 +91,6 @@ const SingleProduct = ({homeCheck}:{homeCheck:boolean;}) => {
         {/* <button onClick={addToWishlist}>POST</button> */}
         {/* <pre>{JSON.stringify(product?.message, null, `\t`)}</pre> */}
         {/* <pre>{JSON.stringify(isWishlisted, null, `\t`)}</pre> */}
-
-            {/* <div className="product_cont">
-                <div className="image_cont">
-                    <img src={product?.message.photo} alt={product?.message.photo.split("/Products/")[1]} />
-                    <div className="wishlist_system_cont">
-                        <span>add to wishlist</span>
-                        <BsHeart className="heart_icon" display={isCheckBoxChecked?"none":"block"} />
-                        <BsHeartFill className="heart_icon" color="red" display={isCheckBoxChecked?"block":"none"} />
-                    </div>
-                </div>
-                <div className="details_cont">
-                    <div className="detail_cont">
-                        <div className="detail_heading">Product Type</div><div className="detail_value">{product?.message.productType}</div>
-                    </div>
-                    <div className="detail_cont">
-                        <div className="detail_heading">Name</div><div className="detail_value">{product?.message.name}</div>
-                    </div>
-                    <div className="detail_cont">
-                        <div className="detail_heading">Price</div><div className="detail_value">{product?.message.price}</div>
-                    </div>
-                    <div className="detail_cont">
-                        <div className="detail_heading">Stock</div><div className="detail_value">{product?.message.stock}</div>
-                    </div>
-                    <div className="detail_cont">
-                    </div>
-                    <AddToCart homeCheck={homeCheck} productAmount={product?.message.price as number} productID={product?.message._id as string} haveQunatityInp={true} />
-                    <div className="detail_cont">
-                        <div className="detail_heading">Review this product</div><div className="detail_value"><button className="write_review_btn" onClick={() => navigate(`/review/${productID}`)}>Review</button></div>
-                    </div>
-                </div>
-            </div> */}
-
             <div className="product_cont">
                 <div className="wishlist_system_cont">
                     <span>add to wishlist</span>
@@ -130,7 +98,7 @@ const SingleProduct = ({homeCheck}:{homeCheck:boolean;}) => {
                     <BsHeartFill className="heart_icon" color="red" display={isCheckBoxChecked?"block":"none"} />
                     <input id="wishlist_checkbox" type="checkbox" className="wishlist_checkbox" onClick={addToWishlist} />
                 </div>
-                <ProductContainer homeCheck={homeCheck} hasReviewBtn={true}  productAmount={product?.message.price as number} productID={product?.message._id} haveQunatityInp={true}
+                <ProductContainer homeCheck={homeCheck} hasReviewBtn={true}  productAmount={product?.message.price as number} productPhoto={product?.message.photo} productID={product?.message._id} haveQunatityInp={true}
                     fieldsHeadingArray={[
                         "Product Type", "Name", "Price", "Stock"
                         ]}

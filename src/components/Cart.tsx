@@ -17,7 +17,7 @@ interface ProductTypes {
     price: number;
     stock: number;
     photo: string;
-    wishlistedUsers: {
+    wishlistedUsers?: {
                         _id: string;
                         productType: string;
                         name: string;
@@ -30,7 +30,6 @@ interface ProductTypes {
 interface CartItemsTypes {
     product : ProductTypes;
     quantity : number;
-    image : string;
     _id : string;
     included:boolean;
 }
@@ -43,12 +42,6 @@ interface CartProductTypes {
     }
 }
 
-
-
-// interface AllProductsTotalAmountTypes {
-//     name:string;
-//     subTotal:number;
-// }
 
 const Cart = ({homeCheck}:{homeCheck:boolean;}) => {
     // const [cartData, setCartData] = useState<{success:boolean; message:CartProductTypes}>();
@@ -96,7 +89,7 @@ const Cart = ({homeCheck}:{homeCheck:boolean;}) => {
         let aaaaa:number = 0;
         data.cartItems.forEach((product, index) => {
             const includeCheckbox = document.getElementById(`include_checkbox${index}`) as HTMLInputElement;
-            if (includeCheckbox.checked) {
+            if (includeCheckbox?.checked) {
                 aaaaa += product.product.price*product.quantity;
                 cartItemsA.push({...product, included:true});
             }
@@ -148,7 +141,8 @@ const Cart = ({homeCheck}:{homeCheck:boolean;}) => {
         {/* <pre>{JSON.stringify(cartData, null, `\t`)}</pre> */}
         {/* <pre>{JSON.stringify(orderItems, null, `\t`)}</pre> */}
         {/* <pre>{JSON.stringify(allProductsTotalAmount, null, `\t`)}</pre> */}
-        {/* <pre>{JSON.stringify(refresh)}</pre> */}
+        {/* <pre>{JSON.stringify(cartData, null, `\t`)}</pre> */}
+            
             <div id="cart_cont" className="cart_cont">
                 <div className="checkout_all_cont">
                     <div className="checkout_info" onClick={() => setIsDialogOpen(true)}><BiInfoCircle className="BiInfoCircle"/></div>
@@ -158,43 +152,13 @@ const Cart = ({homeCheck}:{homeCheck:boolean;}) => {
                 {
                     cartData?.cartItems.length !== 0 ?
                         cartData?.cartItems.map((product, index) => (
-                            // <>
-                            //     <div className="product_cont" key={product._id}>
-                            //         <div className="left_section">
-                            //             <Link to={`/product/${product.product._id}`}>
-                            //                 <img src={img} alt={img} />
-                            //             </Link>
-                            //             <input type="checkbox" id={`include_checkbox${index}`} value={product.product.price*product.quantity} onChange={() => {totalAmountCalculator(cartData&&cartData);}} onClick={() => {totalAmountCalculator(cartData&&cartData);}} />
-                            //         </div>
-                            //         <div className="right_section">
-                            //             <div className="detail_cont">
-                            //                 <div className="detail_heading">Product Type</div><div className="detail_value">{product?.product?.productType}</div>
-                            //             </div>
-                            //             <div className="detail_cont">
-                            //                 <div className="detail_heading">Name</div><div className="detail_value">{product?.product?.name}</div>
-                            //             </div>
-                            //             <div className="detail_cont">
-                            //                 <div className="detail_heading">Price</div><div className="detail_value">{product?.product?.price}</div>
-                            //             </div>
-                            //             <div className="detail_cont">
-                            //                 <div className="detail_heading">Quantity</div><div className="detail_value">{product?.quantity}</div>
-                            //             </div>
-                            //             <div className="detail_cont">
-                            //                 <div className="detail_heading">subTotal</div><div className="detail_value">{product?.product?.price*product?.quantity}</div>
-                            //             </div>
-                            //             <AddToCart productAmount={product.product.price*product.quantity} homeCheck={homeCheck} productID={product?.product?._id} reloadFunction={getMyCartProducts} haveQunatityInp={true} hasRemoveBtn={true} />
-                            //         </div>
-
-                            //     </div>
-                            // </>
-
-                                <div className="product_cont" key={index}>
-                                    <div className="include_cont">
-                                        <div className="include_heading">Include to checkout</div>
-                                        <input type="checkbox" id={`include_checkbox${index}`} value={product.product.price*product.quantity} onChange={() => {totalAmountCalculator(cartData&&cartData);}} onClick={() => {totalAmountCalculator(cartData&&cartData);}} />
-                                    </div>
-                                    <ProductContainer homeCheck={homeCheck} hasReviewBtn={false}  productAmount={product.product.price*product.quantity} productID={product?.product?._id} reloadFunction={getMyCartProducts} haveQunatityInp={true} hasRemoveBtn={true} fieldsHeadingArray={["Name", "Price", "Quantity", "Subtotal"]} fieldsValueArray={[product.product.name, product.product.price, product.quantity, product?.product?.price*product?.quantity]} />
+                            <div className="product_cont" key={index}>
+                                <div className="include_cont">
+                                    <div className="include_heading">Include to checkout</div>
+                                    <input type="checkbox" id={`include_checkbox${index}`} value={product.product.price*product.quantity} onChange={() => {totalAmountCalculator(cartData&&cartData);}} onClick={() => {totalAmountCalculator(cartData&&cartData);}} />
                                 </div>
+                                <ProductContainer homeCheck={homeCheck} hasReviewBtn={false}  productAmount={product.product.price*product.quantity} productPhoto={product.product.photo} productID={product?.product?._id} reloadFunction={getMyCartProducts} haveQunatityInp={true} hasRemoveBtn={true} fieldsHeadingArray={["Name", "Price", "Quantity", "Subtotal"]} fieldsValueArray={[product.product.name, product.product.price, product.quantity, product?.product?.price*product?.quantity]} />
+                            </div>
                         ))
                         :
                         <NotFound subject="Products" />

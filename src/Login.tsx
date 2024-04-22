@@ -58,6 +58,7 @@ const Login = () => {
                         reviewedProducts:data.message.reviewedProducts
                     }));
                     console.log("----- Login.tsx  login");
+                    navigate("/");
                 }
             }
             else{

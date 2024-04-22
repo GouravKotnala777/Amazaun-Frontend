@@ -140,9 +140,9 @@ function Home({homeCheck}:{homeCheck:boolean}) {
                 <div className="home_tools_cont">
                     <div className="home_tools">
                         <label>Search By Name</label>
-                        <input type="search" name="name" value={searchInpValue.name} onChange={(e) => {setSearchInpValue({...searchInpValue, [e.target.name]:e.target.value})}} />
+                        <input type="search" name="name" placeholder="Product Name" value={searchInpValue.name} onChange={(e) => {setSearchInpValue({...searchInpValue, [e.target.name]:e.target.value})}} />
                         <label>Search By Product Type</label>
-                        <input type="search" name="productType" value={searchInpValue.productType} onChange={(e) => {setSearchInpValue({...searchInpValue, [e.target.name]:e.target.value})}} />
+                        <input type="search" name="productType" placeholder="Product Type" value={searchInpValue.productType} onChange={(e) => {setSearchInpValue({...searchInpValue, [e.target.name]:e.target.value})}} />
                         <button onClick={() => {isFilterActive?setIsFilterDialogOpen(false):""; fetchingAllProductsWithSearchedQueries();}}>Filter</button>
                     </div>
                 </div>
