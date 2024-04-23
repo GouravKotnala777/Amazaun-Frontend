@@ -3,6 +3,7 @@ import "../styles/add_to_cart.scss";
 import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
 import Skeleton from "./Skeleton";
+import toast, { Toaster } from "react-hot-toast";
 
 const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, hasRemoveBtn, homeCheck}:{productAmount?:number; productID?:string; reloadFunction?:()=> Promise<void>; haveQunatityInp?:boolean; hasRemoveBtn?:boolean; homeCheck?:boolean;}) => {
     const [quantity, setQuantity] = useState<number>(1);
@@ -35,6 +36,10 @@ const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, h
             
             if (data.success) {
                 reloadFunction&&reloadFunction();
+                toast.success("Added to cart", {
+                    duration:2000,
+                    position:"bottom-center"
+                })
             }
             if (data.success === false && data.message === "Unauthorized request") {
                 navigate("/login");
@@ -47,6 +52,10 @@ const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, h
             console.log(error);
             console.log("-------  Home.tsx  addToCart");
             setIsAddBtnActive(false);
+            toast.error("Error Occured", {
+                duration:2000,
+                position:"bottom-center"
+            })
         }
         
     }
@@ -67,6 +76,10 @@ const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, h
             console.log(data);
             if (data.success) {
                 reloadFunction&&reloadFunction();
+                toast.success("Removed from cart", {
+                    duration:2000,
+                    position:"bottom-center"
+                })
             }
             if (data.success === false && data.message === "Unauthorized request") {
                 navigate("/login");
@@ -77,6 +90,10 @@ const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, h
             console.log("-------  Home.tsx  removeFromCart");
             console.log(error);
             console.log("-------  Home.tsx  removeFromCart");
+            toast.error("Error Occured", {
+                duration:2000,
+                position:"bottom-center"
+            })
         }
         
     }
@@ -100,13 +117,14 @@ const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, h
 
             if (data.success) {
                 setIsBuyBtnActive(false);
-                navigate("/shipping", {state:{clientSecret:data.message, productID, quantity}})
-                // <Navigate to="/shipping" />
+                navigate("/shipping", {state:{clientSecret:data.message, checkoutAllData:[{product:productID, quantity}]}});
             }
             else{
                 setIsBuyBtnActive(false);
-                // console.log("error a gaya");
-                // navigate("/shipping", {state:data})
+                toast.error(data.message, {
+                    duration:2000,
+                    position:"bottom-center"
+                })
             }
 
         } catch (error) {
@@ -114,12 +132,17 @@ const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, h
             console.log(error);            
             console.log("------ AddToCart.tsx  buyProduct");
             setIsBuyBtnActive(false);
+            toast.error("Error Occured", {
+                duration:2000,
+                position:"bottom-center"
+            })
         }
     };
 
 
     return(
         <>
+            <Toaster />
             <div className="btn_cont">
                 {
                     hasRemoveBtn &&

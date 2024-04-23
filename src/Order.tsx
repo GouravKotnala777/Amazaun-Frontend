@@ -11,14 +11,16 @@ interface OrderDataTypes {
                 status:string;
                 time:string;
             };
-            product:{
+            productGrouped:{
+                product:{
+                    _id:string;
+                    name:string;
+                    price:number;
+                    photo:string;
+                };
+                quantity:number;
                 _id:string;
-                name:string;
-                price:number;
-                photo:string;
-            };
-            quantity:number;
-            _id:string;
+            }[];
         }[];
         user:string;
     }
@@ -50,29 +52,29 @@ const Order = () => {
             console.log("-------  Order.tx  getMyOrders");
         }
     };
-    const getSingleOrder = async(orderID:string) => {
-        try {
-            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/order/${orderID}`, {
-                method:"GET",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                credentials:"include"
-            });
+    // const getSingleOrder = async(orderID:string) => {
+    //     try {
+    //         const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/order/${orderID}`, {
+    //             method:"GET",
+    //             headers:{
+    //                 "Content-Type":"application/json"
+    //             },
+    //             credentials:"include"
+    //         });
 
-            const data = await res.json();
+    //         const data = await res.json();
 
-            console.log("-------  Order.tx  getSingleOrder");
-            setOrderData(data);
-            console.log(data);
-            console.log("-------  Order.tx  getSingleOrder");
+    //         console.log("-------  Order.tx  getSingleOrder");
+    //         setOrderData(data);
+    //         console.log(data);
+    //         console.log("-------  Order.tx  getSingleOrder");
             
-        } catch (error) {
-            console.log("-------  Order.tx  getSingleOrder");
-            console.log(error);
-            console.log("-------  Order.tx  getSingleOrder");
-        }
-    };
+    //     } catch (error) {
+    //         console.log("-------  Order.tx  getSingleOrder");
+    //         console.log(error);
+    //         console.log("-------  Order.tx  getSingleOrder");
+    //     }
+    // };
 
 
     useEffect(() => {
@@ -109,32 +111,40 @@ const Order = () => {
                         <p>Status</p>
                     </th>
                     {
-                        orderData?.message?.orderItems?.map((order, index) => 
+                        orderData?.message?.orderItems?.map((groupedItems, index) => 
                             (
-                                <tbody className="order_cont" key={index} onClick={() => getSingleOrder(order._id)}>
+                                // <tbody className="order_cont" key={index} onClick={() => getSingleOrder(order._id)}>
+                                <tbody className="order_cont" key={index} >
+                                    
+                                    {groupedItems.productGrouped.map((i, ind) => (
+                                            <div key={ind}>
+                                                <td>
+                                                    <img src={i.product.photo} alt="no photo" />
+                                                </td>
+                                                <td>
+                                                    <p>{index+1}</p>
+                                                </td> 
+                                                <td>
+                                                    <p>{i.product.name}</p>
+                                                </td>
+                                                <td>
+                                                    <p>{i.quantity}</p>
+                                                </td>
+                                                <td>
+                                                    <p>{i.product.price}</p>
+                                                </td>
+                                                <td>
+                                                    <p>{(groupedItems.paymentInfo.time.split("T")[1]).split(".")[0]}</p>
+                                                </td>
+                                                <td>
+                                                    <p>{groupedItems.paymentInfo.time.split("T")[0]}</p>
+                                                </td>
+                                            </div>
+                                    ))}
+                                    {/* 
+                                     */}
                                     <td>
-                                        <p>{index+1}</p>
-                                    </td> 
-                                    <td>
-                                        <img src={order.product.photo} alt="no photo" />
-                                    </td>
-                                    <td>
-                                        <p>{order.product.name}</p>
-                                    </td>
-                                    <td>
-                                        <p>{order.quantity}</p>
-                                    </td> 
-                                    <td>
-                                        <p>{order.product.price}</p>
-                                    </td>
-                                    <td>
-                                        <p>{(order.paymentInfo.time.split("T")[1]).split(".")[0]}</p>
-                                    </td>
-                                    <td>
-                                        <p>{order.paymentInfo.time.split("T")[0]}</p>
-                                    </td>
-                                    <td>
-                                        <p style={{padding:"5px", borderRadius:"4px", color:order.paymentInfo.status === "succeeded" ? "green" : "red", background:order.paymentInfo.status === "succeeded" ? "#d5ffd5" : "#ffd5d5"}}>{order.paymentInfo.status}</p>
+                                        {/* <p style={{padding:"5px", borderRadius:"4px", color:order.paymentInfo.status === "succeeded" ? "green" : "red", background:order.paymentInfo.status === "succeeded" ? "#d5ffd5" : "#ffd5d5"}}>{order.paymentInfo.status}</p> */}
                                     </td>
                                 </tbody>
                             )

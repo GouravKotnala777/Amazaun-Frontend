@@ -13,6 +13,7 @@ interface ShippingFormTypes {
 
 const Shipping = () => {
     const [shippingForm, setShippingForm] = useState<ShippingFormTypes>();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const location = useLocation();
     const navigate = useNavigate();
     const formFields = [
@@ -29,15 +30,17 @@ const Shipping = () => {
     };
 
     const shippingFormSubmitHandler = async() => {
+        setIsLoading(true);
         console.log({shippingForm});
         navigate("/pay", {state:location.state});
+        setIsLoading(false);
     };
 
 
 
     return(
         <>
-            <Form formHeading="Shipping Address" formFields={formFields} onChangeFunc={onChangeHandler} onClickFunc={shippingFormSubmitHandler} />
+            <Form formHeading="Shipping Address" isLoading={isLoading} formFields={formFields} onChangeFunc={onChangeHandler} onClickFunc={shippingFormSubmitHandler} />
         </>
     )
 };

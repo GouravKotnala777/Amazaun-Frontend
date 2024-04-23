@@ -3,17 +3,21 @@ import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-
 import { loadStripe } from "@stripe/stripe-js";
 import { FormEvent, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
+// import { CartItemsTypes } from "./components/Cart";
 
 // import { useState } from "react";
 // import StripeCheckout, { Token } from "react-stripe-checkout";
 
-
+interface CheckoutAllDataTypes {
+    product:string;
+    quantity:number;
+}
 
 
 const stripePromise = loadStripe(
     "pk_test_51Oc3xKSHf5vitJ9rEYdbqKhf7MmyOGBWIL2GJs8NDprnDtHs4QoaVNOUTDIA1mzjBxlwUgY00u6x6AhMD5OMdO4X00WbRXvaOo"
 );
-const CheckOutForm = ({productID, quantity}:{productID:string; quantity:number;}) => {
+const CheckOutForm = ({checkoutAllData}:{checkoutAllData:CheckoutAllDataTypes[]}) => {
     const stripe = useStripe();
     const elements = useElements();
     const [isProcessing, setISProcessing] = useState<boolean>(false);
@@ -43,7 +47,7 @@ const CheckOutForm = ({productID, quantity}:{productID:string; quantity:number;}
                     "Content-Type":"application/json"
                 },
                 credentials:"include",
-                body:JSON.stringify({productID, quantity, status:"Failed", message:error.message})
+                body:JSON.stringify({checkoutAllData, status:"Failed", message:error.message})
             });
 
 
@@ -60,7 +64,7 @@ const CheckOutForm = ({productID, quantity}:{productID:string; quantity:number;}
                     "Content-Type":"application/json"
                 },
                 credentials:"include",
-                body:JSON.stringify({productID, quantity, status:paymentIntent.status, message:paymentIntent.description})
+                body:JSON.stringify({checkoutAllData, status:paymentIntent.status, message:paymentIntent.description})
             });
 
             const data = await res.json();
@@ -72,6 +76,28 @@ const CheckOutForm = ({productID, quantity}:{productID:string; quantity:number;}
             
             console.log({paymentIntent});
             if (paymentIntent.status === "succeeded") {
+
+                try {
+                    const resClearCart = await fetch(`${import.meta.env.VITE_SERVER_URL}/cart/clear`, {
+                        method:"PUT",
+                        headers:{
+                            "Content-Type":"application/json"
+                        },
+                        credentials:"include",
+                        body:JSON.stringify({checkoutAllData})
+                    });
+        
+                    const dataClearCart = await resClearCart.json();
+        
+                    console.log("-------  Checkout.tsx   clear cart after checkout");
+                    console.log(dataClearCart);
+                    console.log("-------  Checkout.tsx   clear cart after checkout");
+                } catch (error) {
+                    console.log("-------  Checkout.tsx   clear cart error");
+                    console.log("error from checkout after payment === succeeded");
+                    console.log(error);
+                    console.log("-------  Checkout.tsx   clear cart error");
+                }
                 
                 console.log("Placing Order");
                 navigate("/orders");
@@ -101,20 +127,34 @@ const CheckOutForm = ({productID, quantity}:{productID:string; quantity:number;}
 const Checkout = () => {
     const location = useLocation();
 
-    const locationState:{clientSecret:string; productID:string; quantity:number;}|undefined = location.state;
+    const locationState:{clientSecret:string; checkoutAllData:CheckoutAllDataTypes[]; cartTotalAmount:number;}|undefined = location.state;
     console.log({locationState});
 
     if (!locationState?.clientSecret) return <Navigate to={"/shipping"} />;
-    if (!locationState?.productID) return <Navigate to={"/"} />;
-    if (!locationState?.quantity) return <Navigate to={"/"} />;
+    if (locationState?.checkoutAllData.length === 0) return <Navigate to={"/"} />;
+    
+    // if (!locationState?.productID) return <Navigate to={"/"} />;
+    // if (!locationState?.quantity) return <Navigate to={"/"} />;
+    
+    if (locationState?.checkoutAllData.length === 1){
+        return (
+            <Elements options={{
+                clientSecret:locationState.clientSecret
+            }} stripe={stripePromise}>
+                <CheckOutForm checkoutAllData={locationState.checkoutAllData} />
+            </Elements>
+        )
+    }
+    else if (locationState.checkoutAllData.length > 1){
+        return (
+            <Elements options={{
+                clientSecret:locationState.clientSecret
+            }} stripe={stripePromise}>
+                <CheckOutForm checkoutAllData={locationState.checkoutAllData} />
+            </Elements>
+        )
 
-    return (
-        <Elements options={{
-            clientSecret:locationState.clientSecret
-        }} stripe={stripePromise}>
-            <CheckOutForm productID={locationState.productID} quantity={locationState.quantity} />
-        </Elements>
-    )
+    }
 };
 
 export default Checkout;

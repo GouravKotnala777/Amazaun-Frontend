@@ -4,6 +4,7 @@ import Form from "./components/Form";
 import { userExist } from "./redux/reducers/userReducer";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 // import { useDispatch } from "react-redux";
 
 interface LoginFormTypes {
@@ -17,6 +18,7 @@ const Login = () => {
         {type:"text", name:"password", placeHolder:"User Password"}
     ];
     const [loginForm, setLoginForm] = useState<LoginFormTypes>();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -25,7 +27,7 @@ const Login = () => {
     };
 
     const login = async() => {
-        console.log(loginForm);
+        setIsLoading(true);
         
         try {
             const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/login`, {
@@ -41,8 +43,7 @@ const Login = () => {
             
             if (data.success) {
                 if (data.message === "verify first") {
-                    
-                    navigate(`/forgetpassword/${loginForm?.email}`)
+                    navigate(`/forgetpassword/${loginForm?.email}`);
                 }
                 else{
                     console.log("----- Login.tsx  login");
@@ -58,18 +59,34 @@ const Login = () => {
                         reviewedProducts:data.message.reviewedProducts
                     }));
                     console.log("----- Login.tsx  login");
-                    navigate("/");
+                    toast.success("Login Successful", {
+                        duration:2000,
+                        position:"bottom-center"
+                    });
+                    setTimeout(() => {
+                        navigate("/");
+                    }, 2300);
                 }
             }
             else{
                 console.log("----- Login.tsx  login");
                 console.log(data.message);
                 console.log("----- Login.tsx  login");
+                toast.error(data.message, {
+                    duration:2000,
+                    position:"bottom-center"
+                });
             }
+            setIsLoading(false);
         } catch (error) {
             console.log("----- Login.tsx  login");
             console.log(error);
             console.log("----- Login.tsx  login");
+            setIsLoading(false);
+            toast.error("Error Occured", {
+                duration:3000,
+                position:"bottom-center"
+            });
         }
 
 
@@ -79,9 +96,10 @@ const Login = () => {
 
     return(
         <>
-            <Form formHeading="Login" formFields={formFields} onChangeFunc={inputChangeHandler} onClickFunc={login} />
+            <Toaster />
+            <Form formHeading="Login" isLoading={isLoading} formFields={formFields} onChangeFunc={inputChangeHandler} onClickFunc={login} />
             <div className="login_links_cont">
-                <Link to="/register" className="login_links">Don't have account?</Link> <span>Or </span>
+                Don't have account?<Link to="/register" className="login_links">Register</Link> <span>Or </span>
                 <Link to="/forgetpasswordpre" className="login_links">forget password?</Link>
             </div>
         </>

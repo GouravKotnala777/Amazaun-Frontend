@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import Form from "./components/Form";
 import { useNavigate, useParams } from "react-router-dom";
+import toast, {Toaster} from "react-hot-toast";
 
 
 interface ReviewFormTypes {
@@ -43,7 +44,19 @@ const Review = () => {
             console.log("------  Review.tsx  reviewSubmitHandler");
             console.log(data);
             if (data.success) {
-                navigate(`/product/${productID}`);
+                toast.success("Review Submitted", {
+                    duration:2000,
+                    position:"bottom-center"
+                });
+                setTimeout(() => {
+                    navigate(`/product/${productID}`);
+                }, 2300);
+            }
+            else{
+                toast.error(data.message, {
+                    duration:2000,
+                    position:"bottom-center"
+                });
             }
             console.log("------  Review.tsx  reviewSubmitHandler");
             
@@ -51,11 +64,16 @@ const Review = () => {
             console.log("------  Review.tsx  reviewSubmitHandler");
             console.log(error);
             console.log("------  Review.tsx  reviewSubmitHandler");
+            toast.error("Error Occured", {
+                duration:2000,
+                position:"bottom-center"
+            });
         }
     };
     
     return(
         <>
+            <Toaster />
             <Form formHeading="Write A Review" formFields={formFields} onChangeFunc={reviewChangeHandler} onClickFunc={reviewSubmitHandler}  />
         </>
     )
