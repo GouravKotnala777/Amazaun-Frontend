@@ -4,11 +4,14 @@ import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
 import Skeleton from "./Skeleton";
 import toast, { Toaster } from "react-hot-toast";
+import { InitialStateType } from "../redux/reducers/userReducer";
+import { useSelector } from "react-redux";
 
 const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, hasRemoveBtn, homeCheck}:{productAmount?:number; productID?:string; reloadFunction?:()=> Promise<void>; haveQunatityInp?:boolean; hasRemoveBtn?:boolean; homeCheck?:boolean;}) => {
     const [quantity, setQuantity] = useState<number>(1);
     const [isAddBtnActive, setIsAddBtnActive] = useState<boolean>(false);
     const [isBuyBtnActive, setIsBuyBtnActive] = useState<boolean>(false);
+    const {payload} = useSelector((state:{userReducer:InitialStateType}) => state.userReducer);
     const navigate = useNavigate();
 
 
@@ -146,11 +149,11 @@ const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, h
             <div className="btn_cont">
                 {
                     hasRemoveBtn &&
-                        <button className="remove_btn" onClick={()=> {!isAddBtnActive&&!isBuyBtnActive&&removeFromCart()}}>Remove</button>
+                        <button className="remove_btn" onClick={()=> {payload?._id ? (!isAddBtnActive&&!isBuyBtnActive&&removeFromCart()) : navigate("/login")}}>Remove</button>
                 }
                 {
                     productID&&productAmount ?
-                        <button style={{zIndex:homeCheck ? "18" : "19", background:homeCheck ? "white" : "#ff3153", transition:"0.5s"}} onClick={() => {!isAddBtnActive&&!isBuyBtnActive&&addToCart()}}>{isAddBtnActive ? <Loader size={13} borderWidth={3} color="#ff3153" /> : "Add"}</button>
+                        <button style={{zIndex:homeCheck ? "18" : "19", background:homeCheck ? "white" : "#ff3153", transition:"0.5s"}} onClick={() => {payload?._id ? (!isAddBtnActive&&!isBuyBtnActive&&addToCart()) : navigate("/login")}}>{isAddBtnActive ? <Loader size={13} borderWidth={3} color="#ff3153" /> : "Add"}</button>
                         :
                         <Skeleton width={30} />
                 }
@@ -167,7 +170,7 @@ const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, h
                 }
                 {
                     productID&&productAmount ?
-                        <button onClick={() => {!isAddBtnActive&&!isBuyBtnActive&&buyProduct()}}>{isBuyBtnActive?<Loader size={13} borderWidth={3} color="#ff824d" /> : "Buy"}</button>
+                        <button onClick={() => {payload?._id ? (!isAddBtnActive&&!isBuyBtnActive&&buyProduct()) : navigate("/login")}}>{isBuyBtnActive?<Loader size={13} borderWidth={3} color="#ff824d" /> : "Buy"}</button>
                         :
                         <Skeleton width={30} />
                 }

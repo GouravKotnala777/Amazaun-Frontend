@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AllProductsTypes } from "./Home";
 import "./styles/single_product.scss";
 // import AddToCart from "./components/AddToCart";
@@ -17,8 +17,8 @@ const SingleProduct = ({homeCheck}:{homeCheck:boolean;}) => {
     const {productID} = useParams();
     const [product, setProduct] = useState<{success:boolean; message:AllProductsTypes}>();
     const [isCheckBoxChecked, setIsCheckBoxChecked] = useState<boolean>();
-    const {payload} = useSelector((state:{userReducer:InitialStateType}) => state.userReducer)
-    // const navigate = useNavigate();
+    const {payload} = useSelector((state:{userReducer:InitialStateType}) => state.userReducer);
+    const navigate = useNavigate();
 
     const getSingleProduct = async() => {
         try {
@@ -58,8 +58,10 @@ const SingleProduct = ({homeCheck}:{homeCheck:boolean;}) => {
 
             console.log("------ SingleProduct.tsx  addToWishlist");
             console.log(data);
-            setProduct(data);
-            setIsCheckBoxChecked(!isCheckBoxChecked);
+            if (data.success) {
+                setProduct(data);
+                setIsCheckBoxChecked(!isCheckBoxChecked);
+            }
             console.log("------ SingleProduct.tsx  addToWishlist");
             
         } catch (error) {
@@ -96,7 +98,7 @@ const SingleProduct = ({homeCheck}:{homeCheck:boolean;}) => {
                     <span>add to wishlist</span>
                     <BsHeart className="heart_icon" display={isCheckBoxChecked?"none":"block"} />
                     <BsHeartFill className="heart_icon" color="red" display={isCheckBoxChecked?"block":"none"} />
-                    <input id="wishlist_checkbox" type="checkbox" className="wishlist_checkbox" onClick={addToWishlist} />
+                    <input id="wishlist_checkbox" type="checkbox" className="wishlist_checkbox" onClick={() => payload?._id ? addToWishlist() : navigate("/login")} />
                 </div>
                 <ProductContainer homeCheck={homeCheck} hasReviewBtn={true}  productAmount={product?.message.price as number} productPhoto={product?.message.photo} productID={product?.message._id} haveQunatityInp={true}
                     fieldsHeadingArray={[

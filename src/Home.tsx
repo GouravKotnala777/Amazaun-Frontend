@@ -1,11 +1,11 @@
 import "./styles/home.scss";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import NotFound from "./components/NotFound";
+// import NotFound from "./components/NotFound";
 import AddToCart from "./components/AddToCart";
 import { FiFilter } from "react-icons/fi";
 import { CgClose } from "react-icons/cg";
-// import Skeleton from "./components/Skeleton";
+import Skeleton from "./components/Skeleton";
 
 
 export interface AllProductsTypes {
@@ -67,6 +67,7 @@ function Home({homeCheck}:{homeCheck:boolean}) {
             setIsFilterActive(!isFilterActive);
             if (isFilterActive) {
                 setIsFilterDialogOpen(false);
+                fetchingAllProducts();
             }
             else{
                 setIsFilterDialogOpen(true);
@@ -158,7 +159,7 @@ function Home({homeCheck}:{homeCheck:boolean}) {
             </dialog>
             {
                 // allProducts ?
-                    allProducts ? 
+                    allProducts.length !== 0 ? 
                         allProducts?.map((product, index) => 
                         (
                             <div className="product_cont" key={index}>
@@ -172,7 +173,21 @@ function Home({homeCheck}:{homeCheck:boolean}) {
                             </div>
                         ))
                         :
-                        <NotFound subject={`Products `} />
+                        <>
+                            <div className="product_cont">
+                                <div className="product_cont_link">
+                                    <div className="product_img">
+                                        <Skeleton height={177} />
+                                    </div>
+                                    <div className="product_detailes"><Skeleton height={20} /></div>
+                                    <div className="product_detailes"><Skeleton height={20} /></div>
+                                    <div className="product_detailes"><Skeleton height={20} /></div>
+                                </div>
+                                <AddToCart homeCheck={homeCheck}/>
+                            </div>
+                        </>
+                        
+                        // <NotFound subject={`Products `} />
                     // :
                     // <>
                     //     <div className="product_cont">

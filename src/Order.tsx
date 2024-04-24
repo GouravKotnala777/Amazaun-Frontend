@@ -52,30 +52,6 @@ const Order = () => {
             console.log("-------  Order.tx  getMyOrders");
         }
     };
-    // const getSingleOrder = async(orderID:string) => {
-    //     try {
-    //         const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/order/${orderID}`, {
-    //             method:"GET",
-    //             headers:{
-    //                 "Content-Type":"application/json"
-    //             },
-    //             credentials:"include"
-    //         });
-
-    //         const data = await res.json();
-
-    //         console.log("-------  Order.tx  getSingleOrder");
-    //         setOrderData(data);
-    //         console.log(data);
-    //         console.log("-------  Order.tx  getSingleOrder");
-            
-    //     } catch (error) {
-    //         console.log("-------  Order.tx  getSingleOrder");
-    //         console.log(error);
-    //         console.log("-------  Order.tx  getSingleOrder");
-    //     }
-    // };
-
 
     useEffect(() => {
         getMyOrders();
@@ -86,7 +62,7 @@ const Order = () => {
             {/* <pre>{JSON.stringify(orderData, null, `\t`)}</pre> */}
             <div className="orders_cont">
                 <table className="order_table">
-                    <th>
+                    {/* <th>
                         <p>Index</p>
                     </th> 
                     <th>
@@ -109,7 +85,7 @@ const Order = () => {
                     </th>
                     <th>
                         <p>Status</p>
-                    </th>
+                    </th> */}
                     {
                         orderData?.message?.orderItems?.map((groupedItems, index) => 
                             (

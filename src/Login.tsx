@@ -59,13 +59,13 @@ const Login = () => {
                         reviewedProducts:data.message.reviewedProducts
                     }));
                     console.log("----- Login.tsx  login");
-                    toast.success("Login Successful", {
-                        duration:2000,
-                        position:"bottom-center"
-                    });
-                    setTimeout(() => {
+                    // toast.success("Login Successful", {
+                    //     duration:2000,
+                    //     position:"bottom-center"
+                    // });
+                    // setTimeout(() => {
                         navigate("/");
-                    }, 2300);
+                    // }, 2300);
                 }
             }
             else{
