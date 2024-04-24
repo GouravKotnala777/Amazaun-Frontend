@@ -5,7 +5,7 @@ import NotFound from "./components/NotFound";
 import AddToCart from "./components/AddToCart";
 import { FiFilter } from "react-icons/fi";
 import { CgClose } from "react-icons/cg";
-import Skeleton from "./components/Skeleton";
+// import Skeleton from "./components/Skeleton";
 
 
 export interface AllProductsTypes {
@@ -23,38 +23,17 @@ export interface AllProductsTypes {
 
 
 function Home({homeCheck}:{homeCheck:boolean}) {
-    const [allProducts, setAllProducts] = useState<{success:boolean; message:AllProductsTypes[]}>();
+    const [allProducts, setAllProducts] = useState<AllProductsTypes[]>([]);
     const [searchInpValue, setSearchInpValue] = useState<{name:string|undefined; productType:string|undefined;}>({name:"", productType:""});
     const [isFilterDialogOpen, setIsFilterDialogOpen] = useState<boolean>(false);
     const [isFilterActive, setIsFilterActive] = useState<boolean>(false);
+    const [skipProducts, setSkipProducts] = useState<number>(0);
+    // const [productChucks, setProductChucks] = useState<AllProductsTypes[]>([]);
 
 
     const fetchingAllProducts = async() => {
         try {
-            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/product/all`, {
-                method:"GET",
-                headers:{
-                    "Content-Type":"application/json"
-                }
-            });
-    
-            const data = await res.json();
-    
-            console.log("----- Home.tsx  fetchingAllProducts");
-            console.log(data);
-            setAllProducts(data);
-            console.log("----- Home.tsx  fetchingAllProducts");
-            
-        } catch (error) {
-            console.log("----- Home.tsx  fetchingAllProducts");
-            console.log(error);
-            console.log("----- Home.tsx  fetchingAllProducts");
-        }
-        
-    };
-    const fetchingAllProductsWithSearchedQueries = async() => {
-        try {
-            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/product/all`, {
+            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/product/all?skipProducts=${skipProducts}`, {
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"
@@ -64,15 +43,21 @@ function Home({homeCheck}:{homeCheck:boolean}) {
     
             const data = await res.json();
     
-            console.log("----- Home.tsx  fetchingAllProductsWithSearchedQueries");
+            console.log("----- Home.tsx  fetchingAllProducts");
             console.log(data);
-            setAllProducts(data);
-            console.log("----- Home.tsx  fetchingAllProductsWithSearchedQueries");
+            // setProductChucks(data.message);
+            if (data.success) {
+                setAllProducts([...allProducts, ...data.message]);
+            }
+            console.log({skipProducts});
+            
+            // console.log(productChucks);
+            console.log("----- Home.tsx  fetchingAllProducts");
             
         } catch (error) {
-            console.log("----- Home.tsx  fetchingAllProductsWithSearchedQueries");
+            console.log("----- Home.tsx  fetchingAllProducts");
             console.log(error);
-            console.log("----- Home.tsx  fetchingAllProductsWithSearchedQueries");
+            console.log("----- Home.tsx  fetchingAllProducts");
         }
         
     };
@@ -100,6 +85,19 @@ function Home({homeCheck}:{homeCheck:boolean}) {
         
     };
 
+    const handleInfiniteScroll = () => {
+        try {
+            if (!isFilterActive) {
+                if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
+                    setSkipProducts((prev) => prev + 1);
+                    console.log("aaaaaaaaaa");
+                }
+            }
+        } catch (error) {
+            console.log(error);            
+        }
+    };
+
     
     useEffect(() => {
         if (isFilterDialogOpen) {
@@ -108,7 +106,8 @@ function Home({homeCheck}:{homeCheck:boolean}) {
     }, [homeCheck]);
     useEffect(() => {
         fetchingAllProducts();
-    }, []);
+        console.log({skipProducts});
+    }, [skipProducts]);
     useEffect(() => {
         if (isFilterDialogOpen) {
             document.body.classList.add("no-scroll");
@@ -118,18 +117,28 @@ function Home({homeCheck}:{homeCheck:boolean}) {
         }
     }, [isFilterDialogOpen]);
     useEffect(() => {
-        if (searchInpValue.name !== "" && searchInpValue.productType !== "") {
-            fetchingAllProductsWithSearchedQueries();
+        if (searchInpValue.name !== "" || searchInpValue.productType !== "") {
+            setAllProducts([]);
         }
         if (searchInpValue.name === "" && searchInpValue.productType === "") {
+            setAllProducts([]);
             fetchingAllProducts();
         }
     }, [searchInpValue]);
 
+    useEffect(() => {
+        if (!isFilterActive) {
+            window.addEventListener("scroll", handleInfiniteScroll);
+        }
+
+        return () => {window.removeEventListener("scroll", handleInfiniteScroll)};
+    }, []);
+
   return (
     <>
+        {/* <pre>{JSON.stringify(productChucks, null, `\t`)}</pre> */}
         <div className="filter_toggle">
-            <div className="filter-operner" style={{background:isFilterActive ? "#ff3153" : "#ff824d"}} onClick={filterHandler}>
+            <div className="filter-operner" style={{background:isFilterActive ? "#ff3153" : "#ff824d"}} onClick={() => {filterHandler(); setAllProducts([]); setSkipProducts(0);}}>
                 {
                     isFilterActive ? <CgClose className="FiFilter" /> : <FiFilter className="FiFilter" />
                 }
@@ -143,14 +152,14 @@ function Home({homeCheck}:{homeCheck:boolean}) {
                         <input type="search" name="name" placeholder="Product Name" value={searchInpValue.name} onChange={(e) => {setSearchInpValue({...searchInpValue, [e.target.name]:e.target.value})}} />
                         <label>Search By Product Type</label>
                         <input type="search" name="productType" placeholder="Product Type" value={searchInpValue.productType} onChange={(e) => {setSearchInpValue({...searchInpValue, [e.target.name]:e.target.value})}} />
-                        <button onClick={() => {isFilterActive?setIsFilterDialogOpen(false):""; fetchingAllProductsWithSearchedQueries();}}>Filter</button>
+                        <button onClick={() => {isFilterActive?setIsFilterDialogOpen(false):""; setSkipProducts(0); setAllProducts([]); fetchingAllProducts();}}>Filter</button>
                     </div>
                 </div>
             </dialog>
             {
-                allProducts ?
-                    allProducts?.success ? 
-                        allProducts?.message?.map((product, index) => 
+                // allProducts ?
+                    allProducts ? 
+                        allProducts?.map((product, index) => 
                         (
                             <div className="product_cont" key={index}>
                                 <Link to={`/product/${product._id}`} className="product_cont_link">
@@ -164,20 +173,20 @@ function Home({homeCheck}:{homeCheck:boolean}) {
                         ))
                         :
                         <NotFound subject={`Products `} />
-                    :
-                    <>
-                        <div className="product_cont">
-                            <div className="product_cont_link">
-                                <div className="product_img">
-                                    <Skeleton height={177} />
-                                </div>
-                                <div className="product_detailes"><Skeleton height={20} /></div>
-                                <div className="product_detailes"><Skeleton height={20} /></div>
-                                <div className="product_detailes"><Skeleton height={20} /></div>
-                            </div>
-                            <AddToCart homeCheck={homeCheck}/>
-                        </div>
-                    </>
+                    // :
+                    // <>
+                    //     <div className="product_cont">
+                    //         <div className="product_cont_link">
+                    //             <div className="product_img">
+                    //                 <Skeleton height={177} />
+                    //             </div>
+                    //             <div className="product_detailes"><Skeleton height={20} /></div>
+                    //             <div className="product_detailes"><Skeleton height={20} /></div>
+                    //             <div className="product_detailes"><Skeleton height={20} /></div>
+                    //         </div>
+                    //         <AddToCart homeCheck={homeCheck}/>
+                    //     </div>
+                    // </>
 
             }
         </div>
