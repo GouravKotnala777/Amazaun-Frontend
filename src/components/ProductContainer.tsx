@@ -1,7 +1,7 @@
 import "../styles/product_container.scss";
 // import { BsHeart, BsHeartFill } from "react-icons/bs";
 import AddToCart from "./AddToCart";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const ProductContainer = ({homeCheck, hasReviewBtn, productAmount, productPhoto, productID, reloadFunction,haveQunatityInp, hasRemoveBtn, fieldsHeadingArray, fieldsValueArray}:{homeCheck:boolean; hasReviewBtn:boolean; productAmount?:number; productPhoto?:string; productID?:string; reloadFunction?:()=> Promise<void>; haveQunatityInp?:boolean; hasRemoveBtn?:boolean; fieldsHeadingArray:string[]|number[]; fieldsValueArray:(string|number|undefined)[];}) => {
@@ -11,7 +11,9 @@ const ProductContainer = ({homeCheck, hasReviewBtn, productAmount, productPhoto,
         <div className="product_container_background">
             {/* {JSON.stringify(productPhoto)} */}
             <div className="image_cont">
-                <img src={productPhoto} alt={productPhoto ? productPhoto.split("/Products/")[1]:"img not found"} />
+                <Link to={`/product/${productID}`}>
+                    <img src={productPhoto} alt={productPhoto ? productPhoto.split("/Products/")[1]:"img not found"} />
+                </Link>
             </div>
             <div className="details_cont">
                 {

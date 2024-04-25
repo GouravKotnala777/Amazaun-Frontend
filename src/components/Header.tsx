@@ -12,6 +12,7 @@ function Header({payload}:{payload:LoginedUserType|null}) {
         <div className="header_cont">
           <span className="user_name_mobile">
             {payload?.name ? `Hi ${payload?.name}` : <NavLink to="/login" className="header_navlink">Login</NavLink>}
+            <NavLink to="cart" className="header_navlink">Cart</NavLink>
           </span>
           <NavLink to="/" className="header_navlink">
             <img src={logo} alt={logo} />
@@ -37,6 +38,7 @@ function Header({payload}:{payload:LoginedUserType|null}) {
             {
               payload?.name && 
               <>
+                <NavLink to="/wishlist" className="header_navlink">Wishlist</NavLink>
                 <NavLink to="/orders" className="header_navlink">Orders</NavLink>
                 <NavLink to="/logout" className="header_navlink">Logout</NavLink>
                 <NavLink to="/cart" className="header_navlink">Cart</NavLink>

@@ -59,12 +59,12 @@ const Cart = ({homeCheck}:{homeCheck:boolean;}) => {
             const data:{success:boolean; message:CartProductTypes} = await res.json();
             console.log("-------  Cart.tsx  getMyCartProducts");
             const cartItemsA:CartItemsTypes[] = [];
+            console.log(data.message);
             if (data.success) {
                 setCartData(data.message);
                 data.message.cartItems.forEach((product) => {
                     cartItemsA?.push({...product, included:true});
                 });
-                console.log(data.message);
                 totalAmountCalculatorA(data.message);
             }
             if (cartData) {
@@ -198,18 +198,21 @@ const Cart = ({homeCheck}:{homeCheck:boolean;}) => {
                     {/* <button onClick={() => {console.log(checkoutAllData)}}>{isBuyAllBtnActive ? <Loader size={13} borderWidth={3} color="#ff824d" /> : "Buy All"}</button> */}
                 </div>
                 {
-                    cartData?.cartItems.length !== 0 ?
-                        cartData?.cartItems.map((product, index) => (
-                            <div className="product_cont" key={index}>
-                                <div className="include_cont">
-                                    <div className="include_heading">Include to checkout</div>
-                                    <input type="checkbox" id={`include_checkbox${index}`} value={product.product.price*product.quantity} onChange={() => {totalAmountCalculator(cartData&&cartData);}} onClick={() => {totalAmountCalculator(cartData&&cartData);}} />
-                                </div>
-                                <ProductContainer homeCheck={homeCheck} hasReviewBtn={false}  productAmount={product.product.price*product.quantity} productPhoto={product.product.photo} productID={product?.product?._id} reloadFunction={getMyCartProducts} haveQunatityInp={true} hasRemoveBtn={true} fieldsHeadingArray={["Name", "Price", "Quantity", "Subtotal"]} fieldsValueArray={[product.product.name, product.product.price, product.quantity, product?.product?.price*product?.quantity]} />
-                            </div>
-                        ))
-                        :
-                        <NotFound subject="Products" />
+                        cartData?.cartItems.length !== undefined ?
+                            cartData?.cartItems.length !== 0 ?
+                                (cartData?.cartItems.map((product, index) => (
+                                    <div className="product_cont" key={index}>
+                                        <div className="include_cont">
+                                            <div className="include_heading">Include to checkout</div>
+                                            <input type="checkbox" id={`include_checkbox${index}`} value={product.product.price*product.quantity} onChange={() => {totalAmountCalculator(cartData&&cartData);}} onClick={() => {totalAmountCalculator(cartData&&cartData);}} />
+                                        </div>
+                                        <ProductContainer homeCheck={homeCheck} hasReviewBtn={false}  productAmount={product.product.price*product.quantity} productPhoto={product.product.photo} productID={product?.product?._id} reloadFunction={getMyCartProducts} haveQunatityInp={true} hasRemoveBtn={true} fieldsHeadingArray={["Name", "Price", "Quantity", "Subtotal"]} fieldsValueArray={[product.product.name, product.product.price, product.quantity, product?.product?.price*product?.quantity]} />
+                                    </div>
+                                )))
+                                :
+                                <NotFound subject="Products" />
+                            :
+                            <NotFound subject="Products" />
                 }
 
                 <dialog className="total_amount_dialog" open={isDialogOpen}>

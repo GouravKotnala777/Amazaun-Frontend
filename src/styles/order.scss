@@ -2,7 +2,7 @@
 
 .orders_cont{
     // border: 2px solid red;
-    margin: 20px auto;
+    margin: 10px auto;
     overflow:scroll;
     background: white;
     position: relative;
@@ -42,24 +42,39 @@
         width: 450px;
         padding: 10px;
         margin:0 auto;
-        th{
+        // display: flex;
+        .order_info_status{
             // border: 2px solid blue;
-            padding: 5px 10px;
-        }
-        .order_cont{
-            // border: 2px solid green;
-            text-align: center;
-            cursor: pointer;
-            &:hover{
-                color: $primary;
-            }
-            td{
-                // border: 2px solid blue;
-                padding: 5px 10px;
+            width: 100%;
+            margin: 30px 0;
+            .order_info{
+                // border: 2px solid green;
+                display: flex;
+                // justify-content:left;
+                margin: 10px 0;
+
                 img{
-                    width: 30px;
+                    width: 50px;
+                }
+                p{
+                    // border: 1px solid red;
+                    width: 10rem;
+                    text-align: center;
                 }
             }
+            .order_status{
+                // border: 2px solid pink;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                height: 30px;
+                background: linear-gradient(90deg, $secondary, $primary);
+                border-radius:4px;
+                color: white;
+            }
+        }
+        th{
+            padding: 5px 10px;
         }
     }
 }

@@ -26,6 +26,7 @@ import VerifyEmail from "./VerifyEmail"
 // import ForgetPassword from "./FrogetPassword"
 import ForgetPasswordPre from "./ForgetPasswordPre"
 import ForgetPassword from "./FrogetPassword"
+import WishlistedProducts from "./WishlistedProducts"
 
 
 function App() {
@@ -135,6 +136,7 @@ function App() {
           <Route path="/forgetpasswordpre" element={<ForgetPasswordPre />} />
           <Route path="/forgetpassword/:email" element={<ForgetPassword />} />
           <Route path="/verifyemail" element={<VerifyEmail />} />
+          <Route path="/wishlist" element={<WishlistedProducts homeCheck={homeCheck} />} />
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

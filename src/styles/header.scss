@@ -2,7 +2,7 @@
 
 
 .header_cont{
-    // border:2px solid red;
+    border:2px solid red;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -21,16 +21,16 @@
         background: white;
     }
     .navbar_cont{
-        // border: 2px solid greenyellow;
-        width: 40%;
+        border: 2px solid greenyellow;
+        width: 60%;
         display: flex;
         justify-content: space-between;
         .user_name_pc{
             color:white;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
         .header_navlink{
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             text-decoration: none;
             color: white;
         }
@@ -42,9 +42,13 @@
         justify-content: flex-end;
         padding:4px;
         .user_name_mobile{
-            display: block;
+            border: 2px solid red;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             color:white;
-            font-size: 1.3rem;
+            width: 30%;
+            font-size: 1.2rem;
             margin:0 10px;
             .header_navlink{
                 font-size: 1.3rem;

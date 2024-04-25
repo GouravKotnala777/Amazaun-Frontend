@@ -1,3 +1,4 @@
+import NotFound from "./components/NotFound";
 import "./styles/order.scss";
 import { useEffect, useState } from "react";
 
@@ -117,7 +118,8 @@ const AllOrders = () => {
             {/* <pre>{JSON.stringify(allOrderData, null, `\t`)}</pre> */}
             <div className="orders_cont">
 
-                {/* <dialog className="order_dialog" open={isOrderDialogOpen}>
+                {/* 
+                <dialog className="order_dialog" open={isOrderDialogOpen}>
                     <button className="order_dialog_close_btn" onClick={() => setIsOrderDialogOpen(false)}>X</button>
                     <div className="image_cont">
                         <img src={selectedOrder?.message.product.photo} alt={selectedOrder?.message.product.photo.split("/Products/")[1]} />
@@ -130,54 +132,50 @@ const AllOrders = () => {
                     </div>
                 </dialog> */}
 
-                <table className="order_table">
+                {/* <div className="order_table"> */}
                     {
-                        allOrderData?.message?.map((customer) => 
+                        allOrderData?.success ?
+                        (
+                            allOrderData.message.length !== 0 ? 
                             (
-                                
-                                customer.orderItems.map((order, orderIndex) => 
-                                    (
-                                        <tbody className="order_cont" key={orderIndex}>
-                                            {
-                                                order.productGrouped.map((i, ii) => (
-                                                    <div key={ii}>
-                                                        <td>
-                                                            <img src={i.product.photo} alt="no photo" />
-                                                        </td>
-                                                        <td>
-                                                            <p>{i.product.name}</p>
-                                                        </td>
-                                                        <td>
-                                                            <p>{i.quantity}</p>
-                                                        </td>
-                                                        <td>
-                                                            <p>{i.product.price}</p>
-                                                        </td>
-                                                        <td>
-                                                            <p>{customer.user.name}</p>
-                                                        </td>
-                                                        <td>
-                                                            <p>{customer.user.email}</p>
-                                                        </td>
+                                allOrderData?.message?.map((customer) => 
+                                (
+                                    <div className="order_table">
+                                        {customer.orderItems.map((groupedItems, orderIndex) => 
+                                            (
+                                                <div className="order_info_status" key={orderIndex} >
+                                                    <div className="order_status">
+                                                        <p>{(groupedItems.paymentInfo.time.split("T")[1]).split(".")[0]}</p>
+                                                        <p>{groupedItems.paymentInfo.time.split("T")[0]}</p>
+                                                        <p style={{padding:"5px", borderRadius:"4px", color:groupedItems.paymentInfo.status === "succeeded" ? "green" : "red", background:groupedItems.paymentInfo.status === "succeeded" ? "#d5ffd5" : "#ffd5d5"}}>{groupedItems.paymentInfo.status}</p>
                                                     </div>
-                                                ))
-                                            }
-                                            <td>
-                                                <p>{(order.paymentInfo.time.split("T")[1]).split(".")[0]}</p>
-                                            </td>
-                                            <td>
-                                                <p>{order.paymentInfo.time.split("T")[0]}</p>
-                                            </td>
-                                            <td>
-                                                <p style={{padding:"5px", borderRadius:"4px", color:order.paymentInfo.status === "succeeded" ? "green" : "red", background:order.paymentInfo.status === "succeeded" ? "#d5ffd5" : "#ffd5d5"}}>{order.paymentInfo.status}</p>
-                                            </td>
-                                        </tbody>
-                                    )
-                                )
+                                                    {groupedItems.productGrouped.map((i, ind) => (
+                                                            <div className="order_info" key={ind}>
+                                                                <img src={i.product.photo} alt="no photo" />
+                                                                
+                                                                <p>{i.product.name}</p>
+                                                                
+                                                                <p>{i.quantity} x</p>
+                                                                
+                                                                <p>{i.product.price}/- ₹</p>
+                                                                
+                                                            </div>
+                                                    ))}
+                                                </div>
+                                            )
+                                        )}
+                                    </div>
+                                ))
                             )
+                            :
+                            <NotFound subject="Orders" />
+                        )
+                        :
+                        (
+                            <NotFound subject="Orders" />
                         )
                     }
-                </table>
+                {/* </div> */}
             </div>
         </>
     )

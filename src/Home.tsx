@@ -49,7 +49,15 @@ function Home({homeCheck}:{homeCheck:boolean}) {
             if (data.success) {
                 setAllProducts([...allProducts, ...data.message]);
             }
+            // else{
+            //     if (data.message === "No product exists") {
+            //         allProducts.splice(0, 6);
+            //         setSkipProducts(0);
+            //     }
+            // }
             console.log({skipProducts});
+            console.log({len:allProducts.length});
+            
             
             // console.log(productChucks);
             console.log("----- Home.tsx  fetchingAllProducts");

@@ -8,14 +8,13 @@ import { useSelector } from "react-redux";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 import RatingStar from "./components/RatingStar";
 import ProductContainer from "./components/ProductContainer";
+import toast, { Toaster } from "react-hot-toast";
 
-// interface ProductType {
 
-// }
 let wishlistCheckbox:HTMLElement|null;
 const SingleProduct = ({homeCheck}:{homeCheck:boolean;}) => {
     const {productID} = useParams();
-    const [product, setProduct] = useState<{success:boolean; message:AllProductsTypes}>();
+    const [product, setProduct] = useState<{success:boolean; message:AllProductsTypes, message2:string;}>();
     const [isCheckBoxChecked, setIsCheckBoxChecked] = useState<boolean>();
     const {payload} = useSelector((state:{userReducer:InitialStateType}) => state.userReducer);
     const navigate = useNavigate();
@@ -61,6 +60,11 @@ const SingleProduct = ({homeCheck}:{homeCheck:boolean;}) => {
             if (data.success) {
                 setProduct(data);
                 setIsCheckBoxChecked(!isCheckBoxChecked);
+
+                toast.success(data.message2, {
+                    duration:2000,
+                    position:"bottom-center"
+                })
             }
             console.log("------ SingleProduct.tsx  addToWishlist");
             
@@ -93,6 +97,7 @@ const SingleProduct = ({homeCheck}:{homeCheck:boolean;}) => {
         {/* <button onClick={addToWishlist}>POST</button> */}
         {/* <pre>{JSON.stringify(product?.message, null, `\t`)}</pre> */}
         {/* <pre>{JSON.stringify(isWishlisted, null, `\t`)}</pre> */}
+            <Toaster />
             <div className="product_cont">
                 <div className="wishlist_system_cont">
                     <span>add to wishlist</span>

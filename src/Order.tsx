@@ -61,72 +61,33 @@ const Order = () => {
         <>
             {/* <pre>{JSON.stringify(orderData, null, `\t`)}</pre> */}
             <div className="orders_cont">
-                <table className="order_table">
-                    {/* <th>
-                        <p>Index</p>
-                    </th> 
-                    <th>
-                        <p>Img</p>
-                    </th>
-                    <th>
-                        <p>Name</p>
-                    </th>
-                    <th>
-                        <p>Quantity</p>
-                    </th> 
-                    <th>
-                        <p>Price</p>
-                    </th>
-                    <th>
-                        <p>Time</p>
-                    </th>
-                    <th>
-                        <p>Date</p>
-                    </th>
-                    <th>
-                        <p>Status</p>
-                    </th> */}
+                <div className="order_table">
                     {
                         orderData?.message?.orderItems?.map((groupedItems, index) => 
                             (
-                                // <tbody className="order_cont" key={index} onClick={() => getSingleOrder(order._id)}>
-                                <tbody className="order_cont" key={index} >
-                                    
+                                <div className="order_info_status" key={index} >
+                                    <div className="order_status">
+                                        <p>{(groupedItems.paymentInfo.time.split("T")[1]).split(".")[0]}</p>
+                                        <p>{groupedItems.paymentInfo.time.split("T")[0]}</p>
+                                        <p style={{padding:"5px", borderRadius:"4px", color:groupedItems.paymentInfo.status === "succeeded" ? "green" : "red", background:groupedItems.paymentInfo.status === "succeeded" ? "#d5ffd5" : "#ffd5d5"}}>{groupedItems.paymentInfo.status}</p>
+                                    </div>
                                     {groupedItems.productGrouped.map((i, ind) => (
-                                            <div key={ind}>
-                                                <td>
-                                                    <img src={i.product.photo} alt="no photo" />
-                                                </td>
-                                                <td>
-                                                    <p>{index+1}</p>
-                                                </td> 
-                                                <td>
-                                                    <p>{i.product.name}</p>
-                                                </td>
-                                                <td>
-                                                    <p>{i.quantity}</p>
-                                                </td>
-                                                <td>
-                                                    <p>{i.product.price}</p>
-                                                </td>
-                                                <td>
-                                                    <p>{(groupedItems.paymentInfo.time.split("T")[1]).split(".")[0]}</p>
-                                                </td>
-                                                <td>
-                                                    <p>{groupedItems.paymentInfo.time.split("T")[0]}</p>
-                                                </td>
+                                            <div className="order_info" key={ind}>
+                                                <img src={i.product.photo} alt="no photo" />
+                                                 
+                                                <p>{i.product.name}</p>
+                                                
+                                                <p>{i.quantity} x</p>
+                                                
+                                                <p>{i.product.price}/- ₹</p>
+                                                
                                             </div>
                                     ))}
-                                    {/* 
-                                     */}
-                                    <td>
-                                        {/* <p style={{padding:"5px", borderRadius:"4px", color:order.paymentInfo.status === "succeeded" ? "green" : "red", background:order.paymentInfo.status === "succeeded" ? "#d5ffd5" : "#ffd5d5"}}>{order.paymentInfo.status}</p> */}
-                                    </td>
-                                </tbody>
+                                </div>
                             )
                         )
                     }
-                </table>
+                </div>
             </div>
         </>
     )
