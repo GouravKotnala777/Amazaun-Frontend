@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 const HeaderWrapper = ({homeCheckOn, homeCheckOff}:{homeCheckOn:()=>void; homeCheckOff:()=>void;}) => {
     const {payload} = useSelector((state:{userReducer:InitialStateType}) => state.userReducer);
     const [homeCheck, setHomeCheck] = useState<boolean>(false);
-    const [scrollTopPosition, setScrollTopPosition] = useState<number>(0);
 
 
 
@@ -27,11 +26,9 @@ const HeaderWrapper = ({homeCheckOn, homeCheckOff}:{homeCheckOn:()=>void; homeCh
 
 
       if (!visible) {
-        setScrollTopPosition(document.documentElement.scrollTop);
         console.log(visible);
       }
       else{
-        setScrollTopPosition(0);
         console.log(visible);
       }     
   
