@@ -2,11 +2,11 @@
 
 
 .header_cont{
-    border:2px solid red;
+    // border:2px solid red;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding:10px;
+    padding:2px 10px;
     background: linear-gradient(90deg, $secondary, $primary);
     border-radius: 8px;
     // .search_inp{
@@ -16,12 +16,12 @@
         display: none;
     }
     img{
-        width: 50px;
+        width: 40px;
         border-radius: 2rem;
         background: white;
     }
     .navbar_cont{
-        border: 2px solid greenyellow;
+        // border: 2px solid greenyellow;
         width: 60%;
         display: flex;
         justify-content: space-between;
@@ -40,9 +40,10 @@
 @media screen and (width <= 570px) {
     .header_cont{
         justify-content: flex-end;
-        padding:4px;
+        margin: 3px 0 0 3px;
+        // padding:1px;
         .user_name_mobile{
-            border: 2px solid red;
+            // border: 2px solid red;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -51,13 +52,13 @@
             font-size: 1.2rem;
             margin:0 10px;
             .header_navlink{
-                font-size: 1.3rem;
+                font-size: 1.1rem;
                 text-decoration: none;
                 color: white;
             }
         }
         img{
-            width: 40px;
+            width: 35px;
             border-radius: 2rem;
             background: white;
         }

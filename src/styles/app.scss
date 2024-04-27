@@ -24,39 +24,11 @@
     
 }
 
-.ham_inp_wrapper{
-    // border: 2px solid blue;
-    width: 100%;
-    height: 108%;
-    display: none;
-    overflow: hidden;
-    position: absolute;
-    top: 0%;
-    .ham_close_area{
-        // border: 2px solid green;
-        // background: red;
-        width: 25%;
-        height: 100%;
-        .CgClose{
-            width: 30px;
-            height: 30px;
-            position: absolute;
-            top: 3%;
-            right: 16%;
-            color: white;
-        }
-    }
-}
-.GiHamburgerMenu{
-    display: none;
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    top: 3.1%;
-    left: 10%;
-    z-index: 19;
-    cursor: pointer;
-}
+
+
+
+
+
 .ham_close_btn{
     // border: 2px solid blue;
     position: absolute;
@@ -87,12 +59,4 @@
         font-size: 11px;
     }
     
-}
-@media screen and (width <= 570px) {
-    .ham_inp_wrapper{
-        display: flex;
-    }
-    .GiHamburgerMenu{
-        display: block;
-    }
 }

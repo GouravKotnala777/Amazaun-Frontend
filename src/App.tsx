@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from "./Home"
 import "./styles/app.scss"
-import Header from "./components/Header"
+// import Header from "./components/Header"
 import Cart from "./components/Cart"
 import AddProduct from "./AddProduct"
 import Login from "./Login"
@@ -12,9 +12,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { InitialStateType, userExist } from "./redux/reducers/userReducer"
 import SingleProduct from "./SingleProduct"
 import Review from "./Review"
-import Hamburger from "./components/Hamburger"
-import { GiHamburgerMenu } from "react-icons/gi"
-import { CgClose } from "react-icons/cg"
+// import Hamburger from "./components/Hamburger"
+// import { GiHamburgerMenu } from "react-icons/gi"
+// import { CgClose } from "react-icons/cg"
 import Checkout from "./Checkout"
 import Shipping from "./Shipping"
 import NotFound from "./components/NotFound"
@@ -27,6 +27,8 @@ import VerifyEmail from "./VerifyEmail"
 import ForgetPasswordPre from "./ForgetPasswordPre"
 import ForgetPassword from "./FrogetPassword"
 import WishlistedProducts from "./WishlistedProducts"
+import Footer from "./components/Footer"
+import HeaderWrapper from "./components/HeaderWrapper"
 
 
 function App() {
@@ -104,15 +106,9 @@ function App() {
     {/* <button onClick={fetchLoggedInUser}>Fetch LoggedIn User</button>
     <pre>{JSON.stringify(loggedInUser, null, `\t`)}</pre> */}
       <BrowserRouter>
-        <div className="ham_inp_wrapper" style={{left:homeCheck ? "0%" : "-76%", background:homeCheck ? "rgba(0, 0, 0, 0.672)" : "rgba(0, 0, 0, 0)", zIndex:homeCheck ? "21" : "-1", transition:"0.5s"}}>
-          <Hamburger payload={payload} onClose={() => setHomeCheck(false)} />
-          <div className="ham_close_area" onClick={() => setHomeCheck(false)}>
-            <CgClose className="CgClose" style={{display:homeCheck ? "block" : "none"}} />
-          </div>
-        </div>
-        <GiHamburgerMenu className="GiHamburgerMenu" onClick={() => setHomeCheck(true)} style={{color:homeCheck ? "white" : "black", transition:"0.5s"}} />
-
-        <Header payload={payload} />
+      
+        <HeaderWrapper homeCheckOn={() => setHomeCheck(true)} homeCheckOff={() => setHomeCheck(false)} />
+        
         <Routes>
           <Route path="/" element={<Home homeCheck={homeCheck} />} />
           <Route path="/product/:productID" element={<SingleProduct homeCheck={homeCheck} />} />
@@ -139,6 +135,7 @@ function App() {
           <Route path="/wishlist" element={<WishlistedProducts homeCheck={homeCheck} />} />
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   )

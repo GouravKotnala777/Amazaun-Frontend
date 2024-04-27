@@ -1,0 +1,45 @@
+@import "./colors";
+
+.footer_cont{
+    // border: 2px solid red;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .links_cont{
+        // border: 2px solid green;
+        // margin: 10px;
+        padding: 0 10px;
+        h3{
+        }
+        .footer_navlink{
+            // border: 2px solid blue;
+            display:block;
+            text-decoration: none;
+            color: #515151;
+            margin: 10px 0;
+            border-bottom:1px solid #d1d1d1;
+            &:hover{
+                color: $primary;
+                border-bottom:1px solid $primary;
+            }
+        }
+    }
+    .about_our_organization{
+        text-align: center;
+        h2{
+
+        }
+        h3{
+            color: #515151;
+        }
+        p{
+            color: #515151;
+        }
+    }
+}
+
+@media screen and (width <= 570px){
+    .footer_cont{
+        flex-direction: column;
+    }
+}
