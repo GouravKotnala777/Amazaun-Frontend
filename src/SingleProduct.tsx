@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import "./styles/single_product.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { AllProductsTypes } from "./Home";
-import "./styles/single_product.scss";
 // import AddToCart from "./components/AddToCart";
 import { InitialStateType } from "./redux/reducers/userReducer";
 import { useSelector } from "react-redux";
@@ -152,7 +152,7 @@ const SingleProduct = ({homeCheck}:{homeCheck:boolean;}) => {
                                 <img src={review.user.avatar?review.user.avatar:"https://res.cloudinary.com/dx4comsu3/image/upload/v1713260670/Avatars/t0qlyva2ss0jm2evdcr7.png"} alt={review.user.avatar?review.user.avatar.split("/Avatars/")[1]:"t0qlyva2ss0jm2evdcr7.png"} />
                             </div>
                             <div className="user_detail">
-                                <div className="user_email">gouravKotnala777adaddaasdsda.gemail.com</div>
+                                <div className="user_email">{review.user.email}</div>
                                 <div className="rating">{review.rating}
 
                                 <RatingStar rating={review.rating} />

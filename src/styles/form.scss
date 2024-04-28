@@ -4,14 +4,14 @@
 .form_background{
     // border: 2px solid red;
     max-width: 40rem;
-    margin: 20px auto;
+    margin: 50px auto;
     padding:1rem;
     border-radius:8px;
     .form_heading{
         // border: 2px solid violet;
         padding: 1rem;
         text-align: center;
-        font-size: 1.5rem;
+        font-size: 18px;
     }
     .form_cont{
         // border: 2px solid indigo;
@@ -25,7 +25,7 @@
             border: 2px solid transparent;
             border-radius:4px;
             transition: 0.2s;
-            font-size: 1.4rem;
+            font-size: 11px;
             
             &:focus{
                 border: 2px solid $btnBackground;
@@ -40,7 +40,7 @@
             background:$btnBackground;
             color: white;
             font-weight:bold;
-            font-size: 1.4rem;
+            font-size: 11px;
             border: none;
             border-radius: 4px;
         }

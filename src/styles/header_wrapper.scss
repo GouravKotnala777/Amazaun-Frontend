@@ -1,15 +1,15 @@
 
 
 .header_wrapper_cont1{
-    height:110vh;
     // top: 0;
     width: 100%;
     position: fixed;
     top: -55px;
+    height: 50px;
     .header_wrapper_cont2{
         position: absolute;
         width: 99%;
-        height: 110vh;
+        height: 45px;
         transition: 0.2s;
         left: -9px;
         .ham_inp_wrapper{
@@ -41,7 +41,7 @@
             width: 20px;
             height: 20px;
             position: absolute;
-            top: 2.5%;
+            top: 31%;
             left: 10%;
             z-index: 1999;
             cursor: pointer;
@@ -53,22 +53,25 @@
 
 @media screen and (width <= 570px) {
     .header_wrapper_cont1{
-        // border: 2px solid green;
+        // border: 2px solid red;
+        // background: red;
         // height:110vh;
         // // top: 0;
         // width: 100%;
         // position: fixed;
         // top: -55px;
         .header_wrapper_cont2{
-            // border: 2px solid rgb(255, 0, 0);
+            // border: 2px solid blue;
+            // background: blue;
             // position: absolute;
             // width: 99%;
             // height: 110vh;
             // transition: 0.2s;
             // left: -9px;
                 .ham_inp_wrapper{
-                    // border: 2px solid blue;
+                    // border: 2px solid green;
                     display: flex;
+                    height: 110vh;
 
                     .ham_close_area{
 

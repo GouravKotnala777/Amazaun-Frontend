@@ -143,7 +143,7 @@ const Cart = ({homeCheck}:{homeCheck:boolean;}) => {
             if (data.success) {
                 setIsBuyAllBtnActive(false);
                 // navigate("/shipping", {state:{clientSecret:data.message, productID, quantity}});
-                navigate("/shipping", {state:{clientSecret:data.message, checkoutAllData}});
+                navigate("/shipping", {state:{clientSecret:data.message, subTotal:allProductsTotalAmount, checkoutAllData}});
             }
             else{
                 setIsBuyAllBtnActive(false);
@@ -251,6 +251,8 @@ const Cart = ({homeCheck}:{homeCheck:boolean;}) => {
                         </table>
                     </div>
                 </dialog>
+
+                
 
 
             </div>

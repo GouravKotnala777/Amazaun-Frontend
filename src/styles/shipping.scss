@@ -1,0 +1,55 @@
+@import "./colors";
+
+.shipping_cont{
+    // border: 1px solid red;
+    margin-top: 70px;
+    .subtotal{
+        // border: 2px solid violet;
+        max-width: 40rem;
+        margin: 10px auto;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        box-sizing: border-box;
+        border-radius: 4px;
+        span{
+            
+        }
+    }
+    .shipping_heading{
+        // border: 2px solid indianred;
+        max-width: 40rem;
+        margin: 10px auto;
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 4px;
+    }
+    .radios_cont{
+        // border: 2px solid indigo;
+        max-width: 40rem;
+        margin: 10px auto;
+        label{
+            // border: 2px solid blue;
+            display: flex;
+            justify-content: space-between;
+            border: 1px solid #c9c9c9;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            &:focus-within{
+                background: linear-gradient(90deg, $primary, $secondary);
+                color: white;
+            }
+        }
+    }
+    .cont{
+        // border: 2px solid red;
+        max-width: 40rem;
+        margin: 10px auto;
+        text-align: right;
+        span{
+            margin-left: 20px;
+        }
+    }
+}

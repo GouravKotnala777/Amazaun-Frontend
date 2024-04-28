@@ -4,13 +4,11 @@
     color:$a;
     font-weight: $b;
 }
-
 :root {
     @include colorMixin(black,500); // if there is not arguments then it's value would be red and bold
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     // background: $color2;
-    // border:2px solid red;
     padding:0;
     margin: 0;
     box-sizing: border-box;

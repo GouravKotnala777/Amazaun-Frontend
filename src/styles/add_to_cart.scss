@@ -21,10 +21,17 @@
         border:none;
         border-radius:4px;
         cursor:pointer;
+        font-size: 9px;
         transition: 0.2s;
+        background: linear-gradient(90deg, $secondary, $primary);
+
         &:hover{
             // background:#ff8753;
             background:$secondary;
         }
-    };
+    }
+    select{
+        font-size: 9px;
+        border-radius: 4px;
+    }
 }

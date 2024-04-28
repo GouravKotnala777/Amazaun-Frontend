@@ -6,38 +6,12 @@
     justify-content: space-around;
     flex-wrap: wrap;
     width: 100%;
-    margin: 20px 0;
+    margin: 70px 0;
     .image_cont{
         // border:2px solid violet;
         width: 200px;
         img{
-            // border:2px solid indigo;
-            // width: 100%;
         }
-        // .wishlist_system_cont{
-        //     border: 2px solid red;
-        //     display: flex;
-        //     align-items: center;
-        //     position: relative;
-        //     width: 100px;
-        //     .heart_icon{
-        //         border: 2px solid greenyellow;
-        //         width:18px;
-        //         height:18px;
-        //         position: absolute;
-        //         top: 0;
-        //         right: 0;
-        //     }
-        //     .wishlist_checkbox{
-        //         // border: 2px solid greenyellow;
-        //         width:20px;
-        //         height:20px;
-        //         position: absolute;
-        //         top: -4px;
-        //         right: -4px;
-        //         opacity: 0;
-        //     }
-        // }
     }
     .details_cont{
         // border:2px solid blue;
@@ -47,7 +21,7 @@
         width: 300px;
         .detail_cont{
             // border:2px solid green;
-            font-size: 14px;
+            font-size: 11px;
             display: flex;
             justify-content: space-between;
             margin: 10px 0;
@@ -68,72 +42,13 @@
                     color: $primary;
                     padding: 10px;
                     border-radius: 4px;
+                    font-size: 9px;
+                    font-weight: bold;
                 }
             }
         }
     }
 }
-
-
-
-
-
-.reviews_cont{
-    // border: 2px solid red;
-    .review_heading{
-        padding:10px;
-        font-size: 20px;
-        background:linear-gradient(90deg, $primary, $secondary);
-        color: white;
-        border-radius: 8px;
-    }
-    .review_cont{
-        // border: 2px solid violet;
-        display: flex;
-        padding:10px;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        align-items: center;
-        .user_photo_cont{
-            // border: 2px solid red;
-            width: 150px;
-            height: 150px;
-            align-content: center;
-            text-align: center;
-
-
-            img{
-                // border: 2px solid green;
-                width:80px;
-                height: 80px;
-                border-radius:50%;
-                // background: red;
-            }
-        }
-        .user_detail{
-            // border: 2px solid blue;
-            font-size: 18px;
-            text-align: center;
-            // margin: 0 10px;
-            width: 450px;
-            min-width: 200px;
-            word-wrap: break-word;
-            .user_email{
-                // border: 2px solid green;
-                font-weight: bold;
-                // color: #515151;
-                color: $primary;
-
-            }
-            .comment{
-                color: #515151;
-                text-align: justify;
-                // padding:10px 20px;
-            }
-        }
-    }
-}
-
 
 @media screen and (width <= 570px) {
     .product_container_background{
@@ -145,11 +60,15 @@
                 width: 100%;
             }
         }
-    }
-    .reviews_cont{
-        .review_cont{
-            .user_detail{
-                font-size: 14px;
+        .details_cont{
+            .detail_cont{
+                font-size: 9px;
+                .detail_heading{
+                }
+                .detail_value{
+                    .write_review_btn{
+                    }
+                }
             }
         }
     }

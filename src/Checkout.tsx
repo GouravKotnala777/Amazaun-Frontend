@@ -17,7 +17,7 @@ interface CheckoutAllDataTypes {
 const stripePromise = loadStripe(
     "pk_test_51Oc3xKSHf5vitJ9rEYdbqKhf7MmyOGBWIL2GJs8NDprnDtHs4QoaVNOUTDIA1mzjBxlwUgY00u6x6AhMD5OMdO4X00WbRXvaOo"
 );
-const CheckOutForm = ({checkoutAllData}:{checkoutAllData:CheckoutAllDataTypes[]}) => {
+const CheckOutForm = ({checkoutAllData, shippingType, subTotal, total}:{checkoutAllData:CheckoutAllDataTypes[], shippingType:string; subTotal:number; total:number;}) => {
     const stripe = useStripe();
     const elements = useElements();
     const [isProcessing, setISProcessing] = useState<boolean>(false);
@@ -47,7 +47,7 @@ const CheckOutForm = ({checkoutAllData}:{checkoutAllData:CheckoutAllDataTypes[]}
                     "Content-Type":"application/json"
                 },
                 credentials:"include",
-                body:JSON.stringify({checkoutAllData, status:"Failed", message:error.message})
+                body:JSON.stringify({checkoutAllData, shippingType, subTotal, total:subTotal+(shippingType === "instant" ? 200 : shippingType === "standard" ? 100 : 0), status:"Failed", message:error.message})
             });
 
 
@@ -64,7 +64,7 @@ const CheckOutForm = ({checkoutAllData}:{checkoutAllData:CheckoutAllDataTypes[]}
                     "Content-Type":"application/json"
                 },
                 credentials:"include",
-                body:JSON.stringify({checkoutAllData, status:paymentIntent.status, message:paymentIntent.description})
+                body:JSON.stringify({checkoutAllData, shippingType, subTotal, total, status:paymentIntent.status, message:paymentIntent.description})
             });
 
             const data = await res.json();
@@ -127,7 +127,7 @@ const CheckOutForm = ({checkoutAllData}:{checkoutAllData:CheckoutAllDataTypes[]}
 const Checkout = () => {
     const location = useLocation();
 
-    const locationState:{clientSecret:string; checkoutAllData:CheckoutAllDataTypes[]; cartTotalAmount:number;}|undefined = location.state;
+    const locationState:{clientSecret:string; checkoutAllData:CheckoutAllDataTypes[]; shippingType:string; subTotal:number; total:number; cartTotalAmount:number;}|undefined = location.state;
     console.log({locationState});
 
     if (!locationState?.clientSecret) return <Navigate to={"/shipping"} />;
@@ -141,7 +141,7 @@ const Checkout = () => {
             <Elements options={{
                 clientSecret:locationState.clientSecret
             }} stripe={stripePromise}>
-                <CheckOutForm checkoutAllData={locationState.checkoutAllData} />
+                <CheckOutForm checkoutAllData={locationState.checkoutAllData} shippingType={locationState.shippingType} subTotal={locationState.subTotal} total={locationState.total} />
             </Elements>
         )
     }
@@ -150,7 +150,7 @@ const Checkout = () => {
             <Elements options={{
                 clientSecret:locationState.clientSecret
             }} stripe={stripePromise}>
-                <CheckOutForm checkoutAllData={locationState.checkoutAllData} />
+                <CheckOutForm checkoutAllData={locationState.checkoutAllData} shippingType={locationState.shippingType} subTotal={locationState.subTotal} total={locationState.total} />
             </Elements>
         )
 

@@ -54,23 +54,23 @@ const HeaderWrapper = ({homeCheckOn, homeCheckOff}:{homeCheckOn:()=>void; homeCh
 
 
 
-    const aaa = () => {
+    // const aaa = () => {
         
-    }
-    useEffect(() => {
-        window.addEventListener("scroll", aaa);
-    }, []);
+    // }
+    // useEffect(() => {
+    //     window.addEventListener("scroll", aaa);
+    // }, []);
     
     return(
         <>
             {/* <div className="header_wrapper_cont1" style={scrollTopPosition <= 90 ? {position:"relative"} : {position:"fixed"}}> */}
             {/* <div className="header_wrapper_cont1" style={{top:visible === false?`${scrollTopPosition-100}px`:`${scrollTopPosition}px`}}> */}
-            <div className="header_wrapper_cont1">
+            <div className="header_wrapper_cont1" style={{ zIndex:homeCheck ? "21" : "20"}}>
               <div className="header_wrapper_cont2" style={{top:visible?"55px":"0px"}}>
                   {/* <div className="header_wrapper_cont2" style={{bottom:scrollTopPosition <= 64 ? `${scrollTopPosition}px` : "64px"}}> */}
                   {/* <div className="header_wrapper_cont2" style={{bottom:scrollTopPosition <= 64 ? `${scrollTopPosition}px` : "64px"}}> */}
 
-                      <div className="ham_inp_wrapper" style={{left:homeCheck ? "-3%" : "-76%", background:homeCheck ? "rgba(0, 0, 0, 0.672)" : "rgba(0, 0, 0, 0)", zIndex:homeCheck ? "21" : "-1", transition:"0.5s"}}>
+                      <div className="ham_inp_wrapper" style={{left:homeCheck ? "-3%" : "-105%", background:homeCheck ? "rgba(0, 0, 0, 0.672)" : "rgba(0, 0, 0, 0)", transition:"0.5s"}}>
                           <Hamburger payload={payload} onClose={() => {setHomeCheck(false); homeCheckOff()}} />
                           <div className="ham_close_area" onClick={() => {setHomeCheck(false); homeCheckOff()}}>
                               <CgClose className="CgClose" style={{display:homeCheck ? "block" : "none"}} />

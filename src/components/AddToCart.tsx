@@ -120,7 +120,11 @@ const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, h
 
             if (data.success) {
                 setIsBuyBtnActive(false);
-                navigate("/shipping", {state:{clientSecret:data.message, checkoutAllData:[{product:productID, quantity}]}});
+                navigate("/shipping", {state:{
+                    clientSecret:data.message,
+                    checkoutAllData:[{product:productID, quantity}],
+                    subTotal:productAmount
+                }});
             }
             else{
                 setIsBuyBtnActive(false);
@@ -153,7 +157,7 @@ const AddToCart = ({productAmount, productID, reloadFunction, haveQunatityInp, h
                 }
                 {
                     productID&&productAmount ?
-                        <button style={{zIndex:homeCheck ? "18" : "19", background:homeCheck ? "white" : "#ff3153", transition:"0.5s"}} onClick={() => {payload?._id ? (!isAddBtnActive&&!isBuyBtnActive&&addToCart()) : navigate("/login")}}>{isAddBtnActive ? <Loader size={13} borderWidth={3} color="#ff3153" /> : "Add"}</button>
+                        <button style={{zIndex:homeCheck ? "18" : "19", background:homeCheck ? "white" : `linear-gradient(90deg, #ff3153, #ff824d)`, transition:"0.5s"}} onClick={() => {payload?._id ? (!isAddBtnActive&&!isBuyBtnActive&&addToCart()) : navigate("/login")}}>{isAddBtnActive ? <Loader size={13} borderWidth={3} color="#ff3153" /> : "Add"}</button>
                         :
                         <Skeleton width={30} />
                 }

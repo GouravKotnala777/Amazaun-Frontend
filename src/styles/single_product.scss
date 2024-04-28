@@ -7,6 +7,7 @@
     align-items: center;
     padding: 20px;
     flex-wrap:wrap;
+    margin-top: 50px;
     .wishlist_system_cont{
         // border: 2px solid red;
         display: flex;
@@ -37,21 +38,24 @@
     }
 }
 .reviews_cont{
-    // border: 2px solid red;
     .review_heading{
         padding:10px;
-        font-size: 20px;
+        font-size: 14px;
         background:linear-gradient(90deg, $primary, $secondary);
         color: white;
         border-radius: 8px;
     }
     .review_cont{
         // border: 2px solid violet;
+        // border: 2px solid red;
+        background: $backgroundThemeSecondary;
+        margin: 10px 0 10px 0;
         display: flex;
         padding:10px;
         flex-wrap: wrap;
         justify-content: space-around;
         align-items: center;
+        border-radius: 8px;
         .user_photo_cont{
             // border: 2px solid red;
             width: 150px;
@@ -70,7 +74,7 @@
         }
         .user_detail{
             // border: 2px solid blue;
-            font-size: 18px;
+            font-size: 14px;
             text-align: center;
             // margin: 0 10px;
             width: 450px;
@@ -98,9 +102,16 @@
     //     gap: 3rem;
     // }
     .reviews_cont{
+        .review_heading{
+            padding:10px;
+            font-size: 11px;
+            background:linear-gradient(90deg, $primary, $secondary);
+            color: white;
+            border-radius: 8px;
+        }
         .review_cont{
             .user_detail{
-                font-size: 14px;
+                font-size: 11px;
             }
         }
     }
