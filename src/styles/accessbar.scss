@@ -1,0 +1,31 @@
+@import "./colors";
+
+.access_bar_cont{
+    border: 1px solid red;
+    position: fixed;
+    width: 99%;
+    margin-left: 0.7%;
+    transition: 0.2s;
+    border-radius: 8px;
+    background:$backgroundThemeSecondary;
+    .access_bar_tools{
+        // border: 2px solid blue;
+        max-width: 100%;
+        display: flex;
+        justify-content: space-around;
+        .access_bar_tool{
+            // border: 2px solid violet;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            .tool_icon{
+                font-size: 16px;
+                color: $primary;
+            }
+            .tool_heading{
+                color: $primary;
+            }
+        }
+    }
+}

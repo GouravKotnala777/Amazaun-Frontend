@@ -6,13 +6,18 @@ interface FormFieldsTypes {
     type:string;
     name:string;
     placeHolder:string;
+    selectOptionFields?:{
+        value:string;
+        placeHolder:string;
+    }[];
 }
 
 interface FormPropTypes {
     isLoading?:boolean;
     formHeading:string;
     formFields:FormFieldsTypes[];
-    onChangeFunc:(e:ChangeEvent<HTMLInputElement>) => void;
+    onChangeFunc:(e:ChangeEvent<HTMLInputElement|HTMLSelectElement>) => void;
+    onSelectFunc?:(e:ChangeEvent<HTMLSelectElement>) => void;
     onClickFunc:() => Promise<void>;
 }
 
@@ -30,7 +35,17 @@ const Form:FC<FormPropTypes> = ({isLoading, formHeading, formFields, onChangeFun
                                 input.type === "file" ?
                                     <input key={index} type={input.type} name={input.name} accept="image/*" onChange={onChangeFunc} />
                                     :
-                                    <input key={index} type={input.type} name={input.name} placeholder={input.placeHolder} onChange={onChangeFunc} />
+                                    input.type === "select" ?
+                                        <select name={input.name} onChange={onChangeFunc}>
+                                            <option value="none">None</option>
+                                            {
+                                                input.selectOptionFields?.map((selectInp, selectInd) => (
+                                                    <option key={selectInd} value={selectInp.value}>{selectInp.placeHolder}</option>
+                                                ))
+                                            }
+                                        </select>
+                                        :
+                                        <input key={index} type={input.type} name={input.name} placeholder={input.placeHolder} onChange={onChangeFunc} />
                         ))
                     }
 

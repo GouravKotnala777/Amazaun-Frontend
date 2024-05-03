@@ -6,6 +6,12 @@ import Header from "./Header";
 import { useSelector } from "react-redux";
 import { InitialStateType } from "../redux/reducers/userReducer";
 import { useEffect, useState } from "react";
+// import { NavLink } from "react-router-dom";
+// import { BiHome } from "react-icons/bi";
+// import { FaBuyNLarge } from "react-icons/fa";
+// import { GoGoal } from "react-icons/go";
+// import { BsBag } from "react-icons/bs";
+import AccessBar from "./AccessBar";
 
 
 const HeaderWrapper = ({homeCheckOn, homeCheckOff}:{homeCheckOn:()=>void; homeCheckOff:()=>void;}) => {
@@ -22,37 +28,11 @@ const HeaderWrapper = ({homeCheckOn, homeCheckOff}:{homeCheckOn:()=>void; homeCh
         const currentScrollPos = window.pageYOffset;
         setVisible(currentScrollPos <= prevScrollPos);
         setPrevScrollPos(currentScrollPos);
-      };
-
-
-      if (!visible) {
-        console.log(visible);
-      }
-      else{
-        console.log(visible);
-      }     
+      };  
   
       window.addEventListener('scroll', handleScroll);
       return () => window.removeEventListener('scroll', handleScroll);
     }, [prevScrollPos]);
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     // const aaa = () => {
         
@@ -78,6 +58,11 @@ const HeaderWrapper = ({homeCheckOn, homeCheckOff}:{homeCheckOn:()=>void; homeCh
                       </div>
                       <GiHamburgerMenu className="GiHamburgerMenu" onClick={() => {setHomeCheck(true); homeCheckOn()}} style={{color:homeCheck ? "white" : "black", transition:"0.5s"}} />
                       <Header payload={payload} />
+                      
+                      <AccessBar homeCheck={homeCheck} visible={visible} />
+
+
+
               
               </div>
             </div>

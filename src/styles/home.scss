@@ -2,13 +2,14 @@
 
 .filter_toggle{
     // border: 2px solid violet;
+    margin-top: 50px;
     padding: 5px;
     .filter-operner{
         // border: 2px solid blue;
         width: 15px;
         height: 15px;
         margin-left: auto;
-        margin-top: 50px;
+        // margin-top: 50px;
         border-radius: 50%;
         padding: 7px;
         color: white;
@@ -109,46 +110,120 @@
             height:260px;
             .product_img{
                 // border: 2px solid rgb(0, 8, 255);
-                width:100%;
-                height: 180px;
+                width:98%;
+                height: 160px;
                 border-radius: 4px;
                 transition: 0.2s;
             }
             .product_detailes{
                 // border:2px solid orange;
                 margin:0.5rem 0;
-                font-size: 1.1rem;
+                font-size: 11px;
             }
-            :nth-child(2){
+            .product_name{
                 color:$primary;
                 font-weight:bold;
-                font-size:1.3rem;
+                font-size:12px;
                 transition: 0.2s;
-            }
-            &:hover > :nth-child(2){
-                color: $secondary;
+                &:hover{
+                    color: $secondary;
+                }
             }
             &:hover > img{
                 background: $primary;
             }
         }
-        .btn_cont{
-            // border:2px solid violet;
-            display:flex;
-            justify-content:space-between;
-            button{
-                padding:10px;
-                font-weight:800;
-                background:#ff3153;
-                color:white;
-                border:none;
-                border-radius:4px;
-                cursor:pointer;
-                transition: 0.2s;
-                &:hover{
-                    background:#ff8753;
-                }
-            };
-        }
     };
 };
+.grouped_by_cont{
+    // border: 2px solid violet;
+    max-width: 1000px;
+    margin: 20px auto;
+    .grouped_heading{
+        // border: 2px solid green;
+        padding:10px;
+        font-size: 14px;
+        background:linear-gradient(90deg, $primary, $secondary);
+        color: white;
+        border-radius: 8px;
+    }
+    .grouped_product{
+        // border: 2px solid rgb(19, 0, 128);
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        .grouped_by_link{
+            // border: 2px solid indigo;
+            width: 100px;
+            // height: 100px;
+            margin: 10px;
+            text-decoration: none;
+            img{
+                // border: 2px solid rgb(9, 255, 0);
+                width: 96%;
+                height: 80px;
+                border-radius: 8px;
+            }
+            .category_heading{
+                // border: 2px solid blue;
+                text-align: center;
+                padding: 2px 0;
+                color: black;
+                font-weight: bold;
+            }
+        }
+    }
+}
+.more_btn_cont{
+    text-align: center;
+    .more_btn{
+        background: transparent;
+        border: 1px solid $primary;
+        color: $primary;
+        border-radius: 4px;
+        padding: 10px;
+        font-size: 9px;
+        font-weight: bold;
+        margin: 10px;
+        cursor: pointer;
+        &:hover{
+            background: $backgroundThemeSecondary;
+        }
+        &:active{
+            background: $primary;
+            color: white;
+        }
+    }
+}
+
+@media screen and (width <= 570px) {
+    .home_cont{
+
+        .product_cont{
+            width:14rem;
+            border-radius:8px;
+            margin:20px 5px;
+            padding: 10px;
+            .product_cont_link{
+                height:230px;
+                .product_img{
+                    width:98%;
+                    // height: 140px;
+                }
+                .product_detailes{
+                    font-size:11px;
+                }
+            }
+        }
+    }
+    
+    .categories_cont{
+        .category_cont{
+            width: 60px;
+            margin: 5px;
+            .category_heading{
+                font-size: 9px;
+            }
+        }
+    }
+}

@@ -1,34 +1,37 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Home from "./Home"
-import "./styles/app.scss"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./Home";
+import "./styles/app.scss";
 // import Header from "./components/Header"
-import Cart from "./components/Cart"
-import AddProduct from "./AddProduct"
-import Login from "./Login"
-import Register from "./Register"
-import { useEffect, useState } from "react"
-import Logout from "./Logout"
-import { useDispatch, useSelector } from "react-redux"
-import { InitialStateType, userExist } from "./redux/reducers/userReducer"
-import SingleProduct from "./SingleProduct"
-import Review from "./Review"
+import Cart from "./components/Cart";
+import AddProduct from "./AddProduct";
+import Login from "./Login";
+import Register from "./Register";
+import { useEffect, useState } from "react";
+import Logout from "./Logout";
+import { useDispatch, useSelector } from "react-redux";
+import { InitialStateType, userExist } from "./redux/reducers/userReducer";
+import SingleProduct from "./SingleProduct";
+import Review from "./Review";
 // import Hamburger from "./components/Hamburger"
 // import { GiHamburgerMenu } from "react-icons/gi"
 // import { CgClose } from "react-icons/cg"
-import Checkout from "./Checkout"
-import Shipping from "./Shipping"
-import NotFound from "./components/NotFound"
-import ProtectedRoute from "./components/ProtectedRoute"
-import PageNotFound from "./components/PageNotFound"
-import Order from "./Order"
-import AllOrders from "./AllOrders"
-import VerifyEmail from "./VerifyEmail"
+import Checkout from "./Checkout";
+import Shipping from "./Shipping";
+import NotFound from "./components/NotFound";
+import ProtectedRoute from "./components/ProtectedRoute";
+import PageNotFound from "./components/PageNotFound";
+import Order from "./Order";
+import AllOrders from "./AllOrders";
+import VerifyEmail from "./VerifyEmail";
 // import ForgetPassword from "./FrogetPassword"
-import ForgetPasswordPre from "./ForgetPasswordPre"
-import ForgetPassword from "./FrogetPassword"
-import WishlistedProducts from "./WishlistedProducts"
-import Footer from "./components/Footer"
-import HeaderWrapper from "./components/HeaderWrapper"
+import ForgetPasswordPre from "./ForgetPasswordPre";
+import ForgetPassword from "./FrogetPassword";
+import WishlistedProducts from "./WishlistedProducts";
+import Footer from "./components/Footer";
+import HeaderWrapper from "./components/HeaderWrapper";
+import ProductByCategory from "./ProductsByCategory";
+import Brands from "./Brands";
+// import AccessBar from "./components/AccessBar"
 
 
 function App() {
@@ -113,6 +116,8 @@ function App() {
           <Route path="/" element={<Home homeCheck={homeCheck} />} />
           <Route path="/product/:productID" element={<SingleProduct homeCheck={homeCheck} />} />
           <Route path="/review/:productID" element={<Review />} />
+          <Route path="/group/:groupedBy/:item" element={<ProductByCategory homeCheck={homeCheck} />} />
+          <Route path="/brands" element={<Brands homeCheck={homeCheck} />} />
 
         // If user is Admin
           <Route path="/product/new" element={<ProtectedRoute isUserloggedIn={payload?.role as string} isAdmin={true} children={<AddProduct />} />} />
@@ -135,6 +140,7 @@ function App() {
           <Route path="/wishlist" element={<WishlistedProducts homeCheck={homeCheck} />} />
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
+        {/* <AccessBar /> */}
         <Footer />
       </BrowserRouter>
     </>

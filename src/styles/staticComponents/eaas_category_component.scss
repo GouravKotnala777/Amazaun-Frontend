@@ -1,0 +1,28 @@
+@import "../colors";
+
+.category_Cont{
+    // border: 2px solid red;
+    max-width: 900px;
+    margin: 0px auto;
+    // margin: 0px 40px;
+    .main_heading{
+        // border: 2px solid rgb(191, 255, 0);
+        font-size: 14px;
+        margin: 20px 0;
+        font-weight: bold;
+        color:$primary;
+    }
+    .sub_heading{
+        // border: 2px solid rgb(0, 255, 68);
+        font-size: 12px;
+        margin: 5px 10px;
+        color: #515151;
+    }
+    .para{
+        // border: 2px solid rgb(0, 55, 255);
+        font-size: 11px;
+        text-align: justify;
+        margin: 10px 20px;
+        
+    }
+}

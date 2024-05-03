@@ -8,15 +8,34 @@
     padding: 20px;
     flex-wrap:wrap;
     margin-top: 50px;
-    .wishlist_system_cont{
+    .delete_product_system{
         // border: 2px solid red;
         display: flex;
         align-items: center;
         position: relative;
         width: 115px;
+        // margin-left: auto;
+        span{
+            // border: 2px solid blue;
+            padding:5px;
+            font-size: 9px;
+        }
+        .MdDeleteForever{
+            // border: 2px solid rgb(0, 255, 179);
+            width:18px;
+            height:18px;
+        }
+    }
+    .wishlist_system_cont{
+        // border: 2px solid red;
+        display: flex;
+        align-items: center;
+        position: relative;
+        width: 95px;
         margin-left: auto;
         span{
             padding:5px;
+            font-size: 9px;
         }
         .heart_icon{
             // border: 2px solid greenyellow;

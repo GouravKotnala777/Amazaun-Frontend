@@ -4,13 +4,15 @@
     // border: 2px solid greenyellow;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     flex-wrap: wrap;
     width: 100%;
-    margin: 70px 0;
+    margin: 10px 0 0 0;
     .image_cont{
         // border:2px solid violet;
         width: 200px;
         img{
+            width: 100%;
         }
     }
     .details_cont{

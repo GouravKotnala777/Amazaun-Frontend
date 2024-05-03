@@ -13,7 +13,8 @@ import Loader from "./Loader";
 
 interface ProductTypes {
     _id: string;
-    productType: string;
+    category: string;
+    brand:string;
     name: string;
     price: number;
     stock: number;
