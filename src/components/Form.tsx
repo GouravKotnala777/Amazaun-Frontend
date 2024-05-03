@@ -16,12 +16,12 @@ interface FormPropTypes {
     isLoading?:boolean;
     formHeading:string;
     formFields:FormFieldsTypes[];
-    onChangeFunc:(e:ChangeEvent<HTMLInputElement|HTMLSelectElement>) => void;
+    onChangeFunc:(e:ChangeEvent<HTMLInputElement>) => void;
     onSelectFunc?:(e:ChangeEvent<HTMLSelectElement>) => void;
     onClickFunc:() => Promise<void>;
 }
 
-const Form:FC<FormPropTypes> = ({isLoading, formHeading, formFields, onChangeFunc, onClickFunc}) => {
+const Form:FC<FormPropTypes> = ({isLoading, formHeading, formFields, onChangeFunc, onSelectFunc, onClickFunc}) => {
     return(
         <>
             <div className="form_background">
@@ -36,7 +36,7 @@ const Form:FC<FormPropTypes> = ({isLoading, formHeading, formFields, onChangeFun
                                     <input key={index} type={input.type} name={input.name} accept="image/*" onChange={onChangeFunc} />
                                     :
                                     input.type === "select" ?
-                                        <select name={input.name} onChange={onChangeFunc}>
+                                        <select name={input.name} onChange={onSelectFunc}>
                                             <option value="none">None</option>
                                             {
                                                 input.selectOptionFields?.map((selectInp, selectInd) => (

@@ -47,15 +47,15 @@ const AddProduct = () => {
 
 
 
-    const inputChangeHandler = (e:ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
+    const inputChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
         if (e.target.type === "text" || e.target.type === "number") {
             setAddProductForm({...addProductForm, [e.target.name]:e.target.value});
             console.log(e.target.name, e.target.value);
         }
-        else if ((e as ChangeEvent<HTMLInputElement>).target.type === "file") {
-            if ((e as ChangeEvent<HTMLInputElement>).target.files && (e as ChangeEvent<HTMLInputElement>).target.files![0]) {
-                console.log((e as ChangeEvent<HTMLInputElement>).target.files![0]);
-                setProductPhoto((e as ChangeEvent<HTMLInputElement>)?.target.files![0]);
+        else if (e.target.type === "file") {
+            if (e.target.files && e.target.files![0]) {
+                console.log(e.target.files![0]);
+                setProductPhoto(e?.target.files![0]);
             }
         }
         else{
@@ -64,10 +64,10 @@ const AddProduct = () => {
         }
     };
 
-    // const selectChangeHandler = (e:ChangeEvent<HTMLSelectElement>) => {    
-    //     setAddProductForm({...addProductForm, [e.target.name]:e.target.value});
-    //     console.log(e.target.name, e.target.value);
-    // }
+    const selectChangeHandler = (e:ChangeEvent<HTMLSelectElement>) => {    
+        setAddProductForm({...addProductForm, [e.target.name]:e.target.value});
+        console.log(e.target.name, e.target.value);
+    }
 
     const addNewProduct = async() => {
         if (productPhoto && addProductForm?.category && addProductForm?.name && addProductForm?.price && addProductForm?.stock && addProductForm?.description && addProductForm?.weight && addProductForm?.length && addProductForm?.width && addProductForm?.height) {
@@ -145,7 +145,7 @@ const AddProduct = () => {
 
     return(
         <>
-            <Form formHeading="Add Product" formFields={formFields} onChangeFunc={inputChangeHandler} onClickFunc={addNewProduct} />
+            <Form formHeading="Add Product" formFields={formFields} onChangeFunc={inputChangeHandler} onSelectFunc={selectChangeHandler} onClickFunc={addNewProduct} />
         </>
     )
 };
