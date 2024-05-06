@@ -241,6 +241,12 @@ function Home({homeCheck}:{homeCheck:boolean}) {
                 :
                 ""
         }
+        {
+            allProducts.length !== 0 ?
+                <ProductCategories heading="Search By Ratings" apiUrl={`/group/ratings`} />
+                :
+                ""
+        }
     </>
   )
 }

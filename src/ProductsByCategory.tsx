@@ -58,29 +58,29 @@ const ProductByCategory = ({homeCheck}:{homeCheck:boolean}) => {
     
 
     const CategoryDetailes = () => {
-        if (item === "EAAs") {
+        if (item === "eaas") {
             return <EAAsCategoryComponent />
         }
-        else if (item === "Protein") {
+        else if (item === "protein") {
             return <ProteinCategoryComponent />
         }
-        else if (item === "Gainer") {
+        else if (item === "gainer") {
             return <GainerCategoryComponent />
         }
-        else if (item === "Recovery") {
+        else if (item === "recovery") {
             return <RecoveryCategoryComponent />
         }
-        else if (item === "Pre-Workout") {
+        else if (item === "pre-workout") {
             return <PreWorkoutCategoryComponent />
         }
-        else if (item === "Post-Workout") {
+        else if (item === "post-workout") {
             return <PostWorkoutCategoryComponent />
         }
-        else if (item === "BCAAs") {
+        else if (item === "bcaas") {
             return <BCAAsCategoryComponent />
         }
         else{
-            return <h1>No Category</h1>
+            return ""
         }
     };
 
@@ -94,7 +94,6 @@ const ProductByCategory = ({homeCheck}:{homeCheck:boolean}) => {
 
             <div className="filter_toggle">
             </div>
-            <h1>{JSON.stringify(item)}</h1>
             <div className="home_cont">
             {
                 // allProducts ?
